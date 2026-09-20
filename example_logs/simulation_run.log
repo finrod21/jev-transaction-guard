@@ -1,0 +1,3131 @@
+=== JEV TRANSACTION SECURITY SIMULATION RUN: 2026-09-20T00:49:01.256802 ===
+
+[09-18 14:15] [Tx #01] [SLOW_HACK ] tenant_slow_hack   | Amt: $     25.00 | Bal: $  5,000.00 | Risk: [░░░░] (0.00/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 718.2ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 25.0,
+            "account_balance": 5000.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-18T14:15:00",
+            "hour": 14,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "known_verified_vendor",
+                "account_age_days": 350,
+                "is_dummy": false
+            },
+            "memo": "saas_dev_subscription"
+        },
+        "tenant_scrutiny_state": "CLEAN"
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 1,
+                "1": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0
+            },
+            "confidence": 1
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "WATCHLIST_REITERATE": 0,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0,
+                "ALLOW": 1
+            },
+            "confidence": 1
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+-------------------------------------------------------------------------------------------------------------------
+[09-18 19:30] [Tx #02] [SLOW_HACK ] tenant_slow_hack   | Amt: $    120.00 | Bal: $  4,975.00 | Risk: [░░░░] (0.10/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 397.8ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 120.0,
+            "account_balance": 4975.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-18T19:30:00",
+            "hour": 19,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "known_verified_vendor",
+                "account_age_days": 350,
+                "is_dummy": false
+            },
+            "memo": "client_dinner_reimbursement"
+        },
+        "tenant_scrutiny_state": "CLEAN",
+        "sliding_window_n_minus_3": {
+            "window_size": 2,
+            "cumulative_outflow": 145.0,
+            "history_sequence": [
+                {
+                    "t_minus": "09-18 14:15",
+                    "amt": 25.0,
+                    "bal": 5000.0,
+                    "to_dummy": false
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0.1,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0.92,
+                "1": 0.08,
+                "2": 0,
+                "3": 0,
+                "4": 0
+            },
+            "confidence": 0.92
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "WATCHLIST_REITERATE": 0.11,
+                "ALLOW": 0.87,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.02
+            },
+            "confidence": 0.8
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+    ↳ Window Context: 1 prior txs in memory; cum. outflow: $145.00
+-------------------------------------------------------------------------------------------------------------------
+[09-19 01:15] [Tx #03] [SLOW_HACK ] tenant_slow_hack   | Amt: $  1,200.00 | Bal: $  4,855.00 | Risk: [████] (3.56/4) | Breach: 0.02 | 🔴 TRIP_CIRCUIT_BREAKER_AND_LOCK | ⚡ 520.6ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 1200.0,
+            "account_balance": 4855.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T01:15:00",
+            "hour": 1,
+            "is_off_hours": true,
+            "recipient": {
+                "id": "burner_sybil_0xdd46",
+                "account_age_days": 0.02,
+                "is_dummy": true
+            },
+            "memo": "crypto_gateway_test_transfer"
+        },
+        "tenant_scrutiny_state": "CLEAN",
+        "sliding_window_n_minus_3": {
+            "window_size": 3,
+            "cumulative_outflow": 1345.0,
+            "history_sequence": [
+                {
+                    "t_minus": "09-18 14:15",
+                    "amt": 25.0,
+                    "bal": 5000.0,
+                    "to_dummy": false
+                },
+                {
+                    "t_minus": "09-18 19:30",
+                    "amt": 120.0,
+                    "bal": 4975.0,
+                    "to_dummy": false
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 3.56,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0,
+                "1": 0,
+                "2": 0.06,
+                "3": 0.31,
+                "4": 0.63
+            },
+            "confidence": 0.64
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+            "probabilities": {
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.69,
+                "ALLOW": 0.03,
+                "WATCHLIST_REITERATE": 0.28
+            },
+            "confidence": 0.53
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> LOCKED
+    ↳ Window Context: 2 prior txs in memory; cum. outflow: $1,345.00
+-------------------------------------------------------------------------------------------------------------------
+[09-19 08:30] [Tx #04] [SLOW_HACK ] tenant_slow_hack   | Amt: $     35.00 | Bal: $  3,655.00 | Risk: [████] (3.51/4) | Breach: 0.02 | 🔴 TRIP_CIRCUIT_BREAKER_AND_LOCK | ⚡ 613.5ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 35.0,
+            "account_balance": 3655.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T08:30:00",
+            "hour": 8,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "known_verified_vendor",
+                "account_age_days": 350,
+                "is_dummy": false
+            },
+            "memo": "aws_hosting_monthly_bill"
+        },
+        "tenant_scrutiny_state": "LOCKED",
+        "sliding_window_n_minus_3": {
+            "window_size": 4,
+            "cumulative_outflow": 1380.0,
+            "history_sequence": [
+                {
+                    "t_minus": "09-18 14:15",
+                    "amt": 25.0,
+                    "bal": 5000.0,
+                    "to_dummy": false
+                },
+                {
+                    "t_minus": "09-18 19:30",
+                    "amt": 120.0,
+                    "bal": 4975.0,
+                    "to_dummy": false
+                },
+                {
+                    "t_minus": "09-19 01:15",
+                    "amt": 1200.0,
+                    "bal": 4855.0,
+                    "to_dummy": true
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 3.51,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0.04,
+                "1": 0.02,
+                "2": 0.03,
+                "3": 0.21,
+                "4": 0.7
+            },
+            "confidence": 0.59
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+            "probabilities": {
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.79,
+                "WATCHLIST_REITERATE": 0.15,
+                "ALLOW": 0.06
+            },
+            "confidence": 0.69
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> LOCKED
+    ↳ Window Context: 3 prior txs in memory; cum. outflow: $1,380.00
+-------------------------------------------------------------------------------------------------------------------
+[11:05:00   ] [Tx #05] [CLEAN     ] tenant_clean_01    | Amt: $    663.00 | Bal: $ 77,071.00 | Risk: [░░░░] (0.01/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 634.3ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 663.0,
+            "account_balance": 77071.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T11:05:00",
+            "hour": 11,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "verified_vendor_373",
+                "account_age_days": 436,
+                "is_dummy": false
+            },
+            "memo": "Vendor settlement invoice #83039"
+        },
+        "tenant_scrutiny_state": "CLEAN"
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0.01,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 1,
+                "1": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0
+            },
+            "confidence": 1
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "WATCHLIST_REITERATE": 0,
+                "ALLOW": 1,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0
+            },
+            "confidence": 1
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+-------------------------------------------------------------------------------------------------------------------
+[11:30:00   ] [Tx #06] [CLEAN     ] tenant_clean_01    | Amt: $    566.00 | Bal: $ 76,408.00 | Risk: [░░░░] (0.10/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 487.9ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 566.0,
+            "account_balance": 76408.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T11:30:00",
+            "hour": 11,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "verified_vendor_388",
+                "account_age_days": 760,
+                "is_dummy": false
+            },
+            "memo": "Vendor settlement invoice #56722"
+        },
+        "tenant_scrutiny_state": "CLEAN",
+        "sliding_window_n_minus_3": {
+            "window_size": 2,
+            "cumulative_outflow": 1229.0,
+            "history_sequence": [
+                {
+                    "t_minus": "11:05:00",
+                    "amt": 663.0,
+                    "bal": 77071.0,
+                    "to_dummy": false
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0.1,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0.92,
+                "1": 0.07,
+                "2": 0,
+                "3": 0.01,
+                "4": 0
+            },
+            "confidence": 0.91
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.03,
+                "ALLOW": 0.88,
+                "WATCHLIST_REITERATE": 0.09
+            },
+            "confidence": 0.83
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+    ↳ Window Context: 1 prior txs in memory; cum. outflow: $1,229.00
+-------------------------------------------------------------------------------------------------------------------
+[11:45:00   ] [Tx #07] [CLEAN     ] tenant_clean_02    | Amt: $    427.00 | Bal: $ 70,956.00 | Risk: [░░░░] (0.01/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 375.3ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 427.0,
+            "account_balance": 70956.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T11:45:00",
+            "hour": 11,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "verified_vendor_213",
+                "account_age_days": 540,
+                "is_dummy": false
+            },
+            "memo": "Vendor settlement invoice #39507"
+        },
+        "tenant_scrutiny_state": "CLEAN"
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0.01,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 1,
+                "1": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0
+            },
+            "confidence": 1
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "WATCHLIST_REITERATE": 0,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0,
+                "ALLOW": 1
+            },
+            "confidence": 1
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+-------------------------------------------------------------------------------------------------------------------
+[11:55:00   ] [Tx #08] [CLEAN     ] tenant_clean_01    | Amt: $    488.00 | Bal: $ 75,842.00 | Risk: [░░░░] (0.05/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 537.1ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 488.0,
+            "account_balance": 75842.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T11:55:00",
+            "hour": 11,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "verified_vendor_742",
+                "account_age_days": 708,
+                "is_dummy": false
+            },
+            "memo": "Vendor settlement invoice #86978"
+        },
+        "tenant_scrutiny_state": "CLEAN",
+        "sliding_window_n_minus_3": {
+            "window_size": 3,
+            "cumulative_outflow": 1717.0,
+            "history_sequence": [
+                {
+                    "t_minus": "11:05:00",
+                    "amt": 663.0,
+                    "bal": 77071.0,
+                    "to_dummy": false
+                },
+                {
+                    "t_minus": "11:30:00",
+                    "amt": 566.0,
+                    "bal": 76408.0,
+                    "to_dummy": false
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0.05,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0.97,
+                "1": 0.03,
+                "2": 0,
+                "3": 0,
+                "4": 0
+            },
+            "confidence": 0.96
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "WATCHLIST_REITERATE": 0.06,
+                "ALLOW": 0.93,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.01
+            },
+            "confidence": 0.89
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+    ↳ Window Context: 2 prior txs in memory; cum. outflow: $1,717.00
+-------------------------------------------------------------------------------------------------------------------
+[12:10:00   ] [Tx #09] [CLEAN     ] tenant_clean_02    | Amt: $    609.00 | Bal: $ 70,529.00 | Risk: [░░░░] (0.15/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 518.4ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 609.0,
+            "account_balance": 70529.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T12:10:00",
+            "hour": 12,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "verified_vendor_105",
+                "account_age_days": 148,
+                "is_dummy": false
+            },
+            "memo": "Vendor settlement invoice #57797"
+        },
+        "tenant_scrutiny_state": "CLEAN",
+        "sliding_window_n_minus_3": {
+            "window_size": 2,
+            "cumulative_outflow": 1036.0,
+            "history_sequence": [
+                {
+                    "t_minus": "11:45:00",
+                    "amt": 427.0,
+                    "bal": 70956.0,
+                    "to_dummy": false
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0.15,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0.88,
+                "1": 0.1,
+                "2": 0.01,
+                "3": 0.01,
+                "4": 0
+            },
+            "confidence": 0.87
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "WATCHLIST_REITERATE": 0.1,
+                "ALLOW": 0.88,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.02
+            },
+            "confidence": 0.82
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+    ↳ Window Context: 1 prior txs in memory; cum. outflow: $1,036.00
+-------------------------------------------------------------------------------------------------------------------
+[12:20:00   ] [Tx #10] [CLEAN     ] tenant_clean_01    | Amt: $    357.00 | Bal: $ 75,354.00 | Risk: [░░░░] (0.09/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 950.8ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 357.0,
+            "account_balance": 75354.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T12:20:00",
+            "hour": 12,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "verified_vendor_511",
+                "account_age_days": 746,
+                "is_dummy": false
+            },
+            "memo": "Vendor settlement invoice #64838"
+        },
+        "tenant_scrutiny_state": "CLEAN",
+        "sliding_window_n_minus_3": {
+            "window_size": 4,
+            "cumulative_outflow": 2074.0,
+            "history_sequence": [
+                {
+                    "t_minus": "11:05:00",
+                    "amt": 663.0,
+                    "bal": 77071.0,
+                    "to_dummy": false
+                },
+                {
+                    "t_minus": "11:30:00",
+                    "amt": 566.0,
+                    "bal": 76408.0,
+                    "to_dummy": false
+                },
+                {
+                    "t_minus": "11:55:00",
+                    "amt": 488.0,
+                    "bal": 75842.0,
+                    "to_dummy": false
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0.09,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0.93,
+                "1": 0.06,
+                "2": 0,
+                "3": 0.01,
+                "4": 0
+            },
+            "confidence": 0.92
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "WATCHLIST_REITERATE": 0.04,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0,
+                "ALLOW": 0.96
+            },
+            "confidence": 0.94
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+    ↳ Window Context: 3 prior txs in memory; cum. outflow: $2,074.00
+-------------------------------------------------------------------------------------------------------------------
+[12:25:00   ] [Tx #11] [CLEAN     ] tenant_clean_03    | Amt: $    311.00 | Bal: $ 56,467.00 | Risk: [░░░░] (0.03/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 382.3ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 311.0,
+            "account_balance": 56467.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T12:25:00",
+            "hour": 12,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "verified_vendor_993",
+                "account_age_days": 137,
+                "is_dummy": false
+            },
+            "memo": "Vendor settlement invoice #23308"
+        },
+        "tenant_scrutiny_state": "CLEAN"
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0.03,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0.98,
+                "1": 0.01,
+                "2": 0.01,
+                "3": 0,
+                "4": 0
+            },
+            "confidence": 0.97
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0,
+                "WATCHLIST_REITERATE": 0,
+                "ALLOW": 1
+            },
+            "confidence": 1
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+-------------------------------------------------------------------------------------------------------------------
+[12:35:00   ] [Tx #12] [CLEAN     ] tenant_clean_02    | Amt: $  1,161.00 | Bal: $ 69,920.00 | Risk: [░░░░] (0.05/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 427.4ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 1161.0,
+            "account_balance": 69920.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T12:35:00",
+            "hour": 12,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "verified_vendor_863",
+                "account_age_days": 670,
+                "is_dummy": false
+            },
+            "memo": "Vendor settlement invoice #56474"
+        },
+        "tenant_scrutiny_state": "CLEAN",
+        "sliding_window_n_minus_3": {
+            "window_size": 3,
+            "cumulative_outflow": 2197.0,
+            "history_sequence": [
+                {
+                    "t_minus": "11:45:00",
+                    "amt": 427.0,
+                    "bal": 70956.0,
+                    "to_dummy": false
+                },
+                {
+                    "t_minus": "12:10:00",
+                    "amt": 609.0,
+                    "bal": 70529.0,
+                    "to_dummy": false
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0.05,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0.97,
+                "1": 0.03,
+                "2": 0,
+                "3": 0,
+                "4": 0
+            },
+            "confidence": 0.96
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "ALLOW": 0.92,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.02,
+                "WATCHLIST_REITERATE": 0.06
+            },
+            "confidence": 0.88
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+    ↳ Window Context: 2 prior txs in memory; cum. outflow: $2,197.00
+-------------------------------------------------------------------------------------------------------------------
+[12:50:00   ] [Tx #13] [CLEAN     ] tenant_clean_03    | Amt: $  1,153.00 | Bal: $ 56,156.00 | Risk: [░░░░] (0.07/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 386.4ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 1153.0,
+            "account_balance": 56156.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T12:50:00",
+            "hour": 12,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "verified_vendor_219",
+                "account_age_days": 605,
+                "is_dummy": false
+            },
+            "memo": "Vendor settlement invoice #50466"
+        },
+        "tenant_scrutiny_state": "CLEAN",
+        "sliding_window_n_minus_3": {
+            "window_size": 2,
+            "cumulative_outflow": 1464.0,
+            "history_sequence": [
+                {
+                    "t_minus": "12:25:00",
+                    "amt": 311.0,
+                    "bal": 56467.0,
+                    "to_dummy": false
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0.07,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0.95,
+                "1": 0.05,
+                "2": 0,
+                "3": 0,
+                "4": 0
+            },
+            "confidence": 0.95
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.03,
+                "ALLOW": 0.87,
+                "WATCHLIST_REITERATE": 0.1
+            },
+            "confidence": 0.81
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+    ↳ Window Context: 1 prior txs in memory; cum. outflow: $1,464.00
+-------------------------------------------------------------------------------------------------------------------
+[13:00:00   ] [Tx #14] [CLEAN     ] tenant_clean_02    | Amt: $    445.00 | Bal: $ 68,759.00 | Risk: [░░░░] (0.15/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 508.2ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 445.0,
+            "account_balance": 68759.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T13:00:00",
+            "hour": 13,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "verified_vendor_232",
+                "account_age_days": 158,
+                "is_dummy": false
+            },
+            "memo": "Vendor settlement invoice #67970"
+        },
+        "tenant_scrutiny_state": "CLEAN",
+        "sliding_window_n_minus_3": {
+            "window_size": 4,
+            "cumulative_outflow": 2642.0,
+            "history_sequence": [
+                {
+                    "t_minus": "11:45:00",
+                    "amt": 427.0,
+                    "bal": 70956.0,
+                    "to_dummy": false
+                },
+                {
+                    "t_minus": "12:10:00",
+                    "amt": 609.0,
+                    "bal": 70529.0,
+                    "to_dummy": false
+                },
+                {
+                    "t_minus": "12:35:00",
+                    "amt": 1161.0,
+                    "bal": 69920.0,
+                    "to_dummy": false
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0.15,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0.88,
+                "1": 0.1,
+                "2": 0.01,
+                "3": 0.01,
+                "4": 0
+            },
+            "confidence": 0.87
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "ALLOW": 0.95,
+                "WATCHLIST_REITERATE": 0.05,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0
+            },
+            "confidence": 0.91
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+    ↳ Window Context: 3 prior txs in memory; cum. outflow: $2,642.00
+-------------------------------------------------------------------------------------------------------------------
+[13:05:00   ] [Tx #15] [CLEAN     ] tenant_clean_04    | Amt: $     91.00 | Bal: $ 79,876.00 | Risk: [░░░░] (0.00/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 463.5ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 91.0,
+            "account_balance": 79876.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T13:05:00",
+            "hour": 13,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "verified_vendor_797",
+                "account_age_days": 669,
+                "is_dummy": false
+            },
+            "memo": "Vendor settlement invoice #85496"
+        },
+        "tenant_scrutiny_state": "CLEAN"
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 1,
+                "1": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0
+            },
+            "confidence": 1
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "WATCHLIST_REITERATE": 0,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0,
+                "ALLOW": 1
+            },
+            "confidence": 1
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+-------------------------------------------------------------------------------------------------------------------
+[13:15:00   ] [Tx #16] [CLEAN     ] tenant_clean_03    | Amt: $    654.00 | Bal: $ 55,003.00 | Risk: [░░░░] (0.06/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 556.8ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 654.0,
+            "account_balance": 55003.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T13:15:00",
+            "hour": 13,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "verified_vendor_248",
+                "account_age_days": 625,
+                "is_dummy": false
+            },
+            "memo": "Vendor settlement invoice #39110"
+        },
+        "tenant_scrutiny_state": "CLEAN",
+        "sliding_window_n_minus_3": {
+            "window_size": 3,
+            "cumulative_outflow": 2118.0,
+            "history_sequence": [
+                {
+                    "t_minus": "12:25:00",
+                    "amt": 311.0,
+                    "bal": 56467.0,
+                    "to_dummy": false
+                },
+                {
+                    "t_minus": "12:50:00",
+                    "amt": 1153.0,
+                    "bal": 56156.0,
+                    "to_dummy": false
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0.06,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0.96,
+                "1": 0.04,
+                "2": 0,
+                "3": 0,
+                "4": 0
+            },
+            "confidence": 0.95
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "WATCHLIST_REITERATE": 0.08,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.01,
+                "ALLOW": 0.91
+            },
+            "confidence": 0.86
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+    ↳ Window Context: 2 prior txs in memory; cum. outflow: $2,118.00
+-------------------------------------------------------------------------------------------------------------------
+[13:30:00   ] [Tx #17] [CLEAN     ] tenant_clean_04    | Amt: $     53.00 | Bal: $ 79,785.00 | Risk: [░░░░] (0.10/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 341.8ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 53.0,
+            "account_balance": 79785.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T13:30:00",
+            "hour": 13,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "verified_vendor_934",
+                "account_age_days": 164,
+                "is_dummy": false
+            },
+            "memo": "Vendor settlement invoice #79011"
+        },
+        "tenant_scrutiny_state": "CLEAN",
+        "sliding_window_n_minus_3": {
+            "window_size": 2,
+            "cumulative_outflow": 144.0,
+            "history_sequence": [
+                {
+                    "t_minus": "13:05:00",
+                    "amt": 91.0,
+                    "bal": 79876.0,
+                    "to_dummy": false
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0.1,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0.92,
+                "1": 0.07,
+                "2": 0.01,
+                "3": 0,
+                "4": 0
+            },
+            "confidence": 0.91
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "WATCHLIST_REITERATE": 0.1,
+                "ALLOW": 0.88,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.02
+            },
+            "confidence": 0.82
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+    ↳ Window Context: 1 prior txs in memory; cum. outflow: $144.00
+-------------------------------------------------------------------------------------------------------------------
+[13:40:00   ] [Tx #18] [CLEAN     ] tenant_clean_03    | Amt: $  1,165.00 | Bal: $ 54,349.00 | Risk: [░░░░] (0.08/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 469.4ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 1165.0,
+            "account_balance": 54349.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T13:40:00",
+            "hour": 13,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "verified_vendor_445",
+                "account_age_days": 554,
+                "is_dummy": false
+            },
+            "memo": "Vendor settlement invoice #19968"
+        },
+        "tenant_scrutiny_state": "CLEAN",
+        "sliding_window_n_minus_3": {
+            "window_size": 4,
+            "cumulative_outflow": 3283.0,
+            "history_sequence": [
+                {
+                    "t_minus": "12:25:00",
+                    "amt": 311.0,
+                    "bal": 56467.0,
+                    "to_dummy": false
+                },
+                {
+                    "t_minus": "12:50:00",
+                    "amt": 1153.0,
+                    "bal": 56156.0,
+                    "to_dummy": false
+                },
+                {
+                    "t_minus": "13:15:00",
+                    "amt": 654.0,
+                    "bal": 55003.0,
+                    "to_dummy": false
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0.08,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0.94,
+                "1": 0.06,
+                "2": 0,
+                "3": 0,
+                "4": 0
+            },
+            "confidence": 0.93
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "ALLOW": 0.92,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.01,
+                "WATCHLIST_REITERATE": 0.07
+            },
+            "confidence": 0.89
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+    ↳ Window Context: 3 prior txs in memory; cum. outflow: $3,283.00
+-------------------------------------------------------------------------------------------------------------------
+[13:45:00   ] [Tx #19] [CLEAN     ] tenant_clean_05    | Amt: $    220.00 | Bal: $ 47,209.00 | Risk: [░░░░] (0.01/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 519.0ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 220.0,
+            "account_balance": 47209.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T13:45:00",
+            "hour": 13,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "verified_vendor_684",
+                "account_age_days": 471,
+                "is_dummy": false
+            },
+            "memo": "Vendor settlement invoice #43604"
+        },
+        "tenant_scrutiny_state": "CLEAN"
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0.01,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 1,
+                "1": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0
+            },
+            "confidence": 1
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "WATCHLIST_REITERATE": 0,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0,
+                "ALLOW": 1
+            },
+            "confidence": 1
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+-------------------------------------------------------------------------------------------------------------------
+[13:55:00   ] [Tx #20] [CLEAN     ] tenant_clean_04    | Amt: $    550.00 | Bal: $ 79,732.00 | Risk: [░░░░] (0.03/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 393.8ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 550.0,
+            "account_balance": 79732.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T13:55:00",
+            "hour": 13,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "verified_vendor_316",
+                "account_age_days": 637,
+                "is_dummy": false
+            },
+            "memo": "Vendor settlement invoice #70819"
+        },
+        "tenant_scrutiny_state": "CLEAN",
+        "sliding_window_n_minus_3": {
+            "window_size": 3,
+            "cumulative_outflow": 694.0,
+            "history_sequence": [
+                {
+                    "t_minus": "13:05:00",
+                    "amt": 91.0,
+                    "bal": 79876.0,
+                    "to_dummy": false
+                },
+                {
+                    "t_minus": "13:30:00",
+                    "amt": 53.0,
+                    "bal": 79785.0,
+                    "to_dummy": false
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0.03,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0.98,
+                "1": 0.02,
+                "2": 0,
+                "3": 0,
+                "4": 0
+            },
+            "confidence": 0.98
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "WATCHLIST_REITERATE": 0.06,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.02,
+                "ALLOW": 0.92
+            },
+            "confidence": 0.88
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+    ↳ Window Context: 2 prior txs in memory; cum. outflow: $694.00
+-------------------------------------------------------------------------------------------------------------------
+[14:10:00   ] [Tx #21] [CLEAN     ] tenant_clean_05    | Amt: $  1,108.00 | Bal: $ 46,989.00 | Risk: [░░░░] (0.06/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 385.2ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 1108.0,
+            "account_balance": 46989.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T14:10:00",
+            "hour": 14,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "verified_vendor_912",
+                "account_age_days": 763,
+                "is_dummy": false
+            },
+            "memo": "Vendor settlement invoice #81784"
+        },
+        "tenant_scrutiny_state": "CLEAN",
+        "sliding_window_n_minus_3": {
+            "window_size": 2,
+            "cumulative_outflow": 1328.0,
+            "history_sequence": [
+                {
+                    "t_minus": "13:45:00",
+                    "amt": 220.0,
+                    "bal": 47209.0,
+                    "to_dummy": false
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0.06,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0.95,
+                "1": 0.05,
+                "2": 0,
+                "3": 0,
+                "4": 0
+            },
+            "confidence": 0.95
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.03,
+                "WATCHLIST_REITERATE": 0.09,
+                "ALLOW": 0.88
+            },
+            "confidence": 0.83
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+    ↳ Window Context: 1 prior txs in memory; cum. outflow: $1,328.00
+-------------------------------------------------------------------------------------------------------------------
+[14:20:00   ] [Tx #22] [CLEAN     ] tenant_clean_04    | Amt: $    932.00 | Bal: $ 79,182.00 | Risk: [░░░░] (0.06/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 357.1ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 932.0,
+            "account_balance": 79182.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T14:20:00",
+            "hour": 14,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "verified_vendor_688",
+                "account_age_days": 373,
+                "is_dummy": false
+            },
+            "memo": "Vendor settlement invoice #43058"
+        },
+        "tenant_scrutiny_state": "CLEAN",
+        "sliding_window_n_minus_3": {
+            "window_size": 4,
+            "cumulative_outflow": 1626.0,
+            "history_sequence": [
+                {
+                    "t_minus": "13:05:00",
+                    "amt": 91.0,
+                    "bal": 79876.0,
+                    "to_dummy": false
+                },
+                {
+                    "t_minus": "13:30:00",
+                    "amt": 53.0,
+                    "bal": 79785.0,
+                    "to_dummy": false
+                },
+                {
+                    "t_minus": "13:55:00",
+                    "amt": 550.0,
+                    "bal": 79732.0,
+                    "to_dummy": false
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0.06,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0.96,
+                "1": 0.04,
+                "2": 0,
+                "3": 0,
+                "4": 0
+            },
+            "confidence": 0.95
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "WATCHLIST_REITERATE": 0.05,
+                "ALLOW": 0.94,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.01
+            },
+            "confidence": 0.92
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+    ↳ Window Context: 3 prior txs in memory; cum. outflow: $1,626.00
+-------------------------------------------------------------------------------------------------------------------
+[14:25:00   ] [Tx #23] [CLEAN     ] tenant_clean_06    | Amt: $    477.00 | Bal: $ 68,831.00 | Risk: [░░░░] (0.01/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 527.5ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 477.0,
+            "account_balance": 68831.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T14:25:00",
+            "hour": 14,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "verified_vendor_131",
+                "account_age_days": 658,
+                "is_dummy": false
+            },
+            "memo": "Vendor settlement invoice #68371"
+        },
+        "tenant_scrutiny_state": "CLEAN"
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0.01,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 1,
+                "1": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0
+            },
+            "confidence": 1
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "ALLOW": 1,
+                "WATCHLIST_REITERATE": 0,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0
+            },
+            "confidence": 1
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+-------------------------------------------------------------------------------------------------------------------
+[14:35:00   ] [Tx #24] [CLEAN     ] tenant_clean_05    | Amt: $  1,174.00 | Bal: $ 45,881.00 | Risk: [░░░░] (0.08/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 578.4ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 1174.0,
+            "account_balance": 45881.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T14:35:00",
+            "hour": 14,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "verified_vendor_902",
+                "account_age_days": 483,
+                "is_dummy": false
+            },
+            "memo": "Vendor settlement invoice #37800"
+        },
+        "tenant_scrutiny_state": "CLEAN",
+        "sliding_window_n_minus_3": {
+            "window_size": 3,
+            "cumulative_outflow": 2502.0,
+            "history_sequence": [
+                {
+                    "t_minus": "13:45:00",
+                    "amt": 220.0,
+                    "bal": 47209.0,
+                    "to_dummy": false
+                },
+                {
+                    "t_minus": "14:10:00",
+                    "amt": 1108.0,
+                    "bal": 46989.0,
+                    "to_dummy": false
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0.08,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0.9400000000000001,
+                "1": 0.06,
+                "2": 0,
+                "3": 0,
+                "4": 0
+            },
+            "confidence": 0.93
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "WATCHLIST_REITERATE": 0.12,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.03,
+                "ALLOW": 0.85
+            },
+            "confidence": 0.77
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+    ↳ Window Context: 2 prior txs in memory; cum. outflow: $2,502.00
+-------------------------------------------------------------------------------------------------------------------
+[14:50:00   ] [Tx #25] [CLEAN     ] tenant_clean_06    | Amt: $  1,042.00 | Bal: $ 68,354.00 | Risk: [░░░░] (0.12/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 387.9ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 1042.0,
+            "account_balance": 68354.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T14:50:00",
+            "hour": 14,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "verified_vendor_288",
+                "account_age_days": 325,
+                "is_dummy": false
+            },
+            "memo": "Vendor settlement invoice #48057"
+        },
+        "tenant_scrutiny_state": "CLEAN",
+        "sliding_window_n_minus_3": {
+            "window_size": 2,
+            "cumulative_outflow": 1519.0,
+            "history_sequence": [
+                {
+                    "t_minus": "14:25:00",
+                    "amt": 477.0,
+                    "bal": 68831.0,
+                    "to_dummy": false
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0.12,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0.9,
+                "1": 0.09,
+                "2": 0.01,
+                "3": 0,
+                "4": 0
+            },
+            "confidence": 0.9
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "WATCHLIST_REITERATE": 0.14,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.03,
+                "ALLOW": 0.83
+            },
+            "confidence": 0.74
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+    ↳ Window Context: 1 prior txs in memory; cum. outflow: $1,519.00
+-------------------------------------------------------------------------------------------------------------------
+[15:00:00   ] [Tx #26] [CLEAN     ] tenant_clean_05    | Amt: $    733.00 | Bal: $ 44,707.00 | Risk: [░░░░] (0.07/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 361.2ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 733.0,
+            "account_balance": 44707.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T15:00:00",
+            "hour": 15,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "verified_vendor_852",
+                "account_age_days": 463,
+                "is_dummy": false
+            },
+            "memo": "Vendor settlement invoice #16586"
+        },
+        "tenant_scrutiny_state": "CLEAN",
+        "sliding_window_n_minus_3": {
+            "window_size": 4,
+            "cumulative_outflow": 3235.0,
+            "history_sequence": [
+                {
+                    "t_minus": "13:45:00",
+                    "amt": 220.0,
+                    "bal": 47209.0,
+                    "to_dummy": false
+                },
+                {
+                    "t_minus": "14:10:00",
+                    "amt": 1108.0,
+                    "bal": 46989.0,
+                    "to_dummy": false
+                },
+                {
+                    "t_minus": "14:35:00",
+                    "amt": 1174.0,
+                    "bal": 45881.0,
+                    "to_dummy": false
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0.07,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0.95,
+                "1": 0.05,
+                "2": 0,
+                "3": 0,
+                "4": 0
+            },
+            "confidence": 0.94
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "WATCHLIST_REITERATE": 0.05,
+                "ALLOW": 0.94,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.01
+            },
+            "confidence": 0.91
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+    ↳ Window Context: 3 prior txs in memory; cum. outflow: $3,235.00
+-------------------------------------------------------------------------------------------------------------------
+[15:05:00   ] [Tx #27] [CLEAN     ] tenant_clean_07    | Amt: $    825.00 | Bal: $ 31,881.00 | Risk: [░░░░] (0.00/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 424.8ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 825.0,
+            "account_balance": 31881.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T15:05:00",
+            "hour": 15,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "verified_vendor_264",
+                "account_age_days": 696,
+                "is_dummy": false
+            },
+            "memo": "Vendor settlement invoice #14480"
+        },
+        "tenant_scrutiny_state": "CLEAN"
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 1,
+                "1": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0
+            },
+            "confidence": 1
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "WATCHLIST_REITERATE": 0,
+                "ALLOW": 1,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0
+            },
+            "confidence": 1
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+-------------------------------------------------------------------------------------------------------------------
+[15:15:00   ] [Tx #28] [CLEAN     ] tenant_clean_06    | Amt: $    662.00 | Bal: $ 67,312.00 | Risk: [░░░░] (0.06/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 432.6ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 662.0,
+            "account_balance": 67312.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T15:15:00",
+            "hour": 15,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "verified_vendor_856",
+                "account_age_days": 569,
+                "is_dummy": false
+            },
+            "memo": "Vendor settlement invoice #28833"
+        },
+        "tenant_scrutiny_state": "CLEAN",
+        "sliding_window_n_minus_3": {
+            "window_size": 3,
+            "cumulative_outflow": 2181.0,
+            "history_sequence": [
+                {
+                    "t_minus": "14:25:00",
+                    "amt": 477.0,
+                    "bal": 68831.0,
+                    "to_dummy": false
+                },
+                {
+                    "t_minus": "14:50:00",
+                    "amt": 1042.0,
+                    "bal": 68354.0,
+                    "to_dummy": false
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0.06,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0.95,
+                "1": 0.05,
+                "2": 0,
+                "3": 0,
+                "4": 0
+            },
+            "confidence": 0.95
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "ALLOW": 0.92,
+                "WATCHLIST_REITERATE": 0.07,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.01
+            },
+            "confidence": 0.88
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+    ↳ Window Context: 2 prior txs in memory; cum. outflow: $2,181.00
+-------------------------------------------------------------------------------------------------------------------
+[15:30:00   ] [Tx #29] [CLEAN     ] tenant_clean_07    | Amt: $    697.00 | Bal: $ 31,056.00 | Risk: [░░░░] (0.09/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 1395.4ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 697.0,
+            "account_balance": 31056.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T15:30:00",
+            "hour": 15,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "verified_vendor_439",
+                "account_age_days": 392,
+                "is_dummy": false
+            },
+            "memo": "Vendor settlement invoice #69570"
+        },
+        "tenant_scrutiny_state": "CLEAN",
+        "sliding_window_n_minus_3": {
+            "window_size": 2,
+            "cumulative_outflow": 1522.0,
+            "history_sequence": [
+                {
+                    "t_minus": "15:05:00",
+                    "amt": 825.0,
+                    "bal": 31881.0,
+                    "to_dummy": false
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0.09,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0.92,
+                "1": 0.07,
+                "2": 0.01,
+                "3": 0,
+                "4": 0
+            },
+            "confidence": 0.92
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "ALLOW": 0.86,
+                "WATCHLIST_REITERATE": 0.11,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.03
+            },
+            "confidence": 0.8
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+    ↳ Window Context: 1 prior txs in memory; cum. outflow: $1,522.00
+-------------------------------------------------------------------------------------------------------------------
+[15:40:00   ] [Tx #30] [CLEAN     ] tenant_clean_06    | Amt: $    242.00 | Bal: $ 66,650.00 | Risk: [░░░░] (0.09/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 400.7ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 242.0,
+            "account_balance": 66650.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T15:40:00",
+            "hour": 15,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "verified_vendor_216",
+                "account_age_days": 345,
+                "is_dummy": false
+            },
+            "memo": "Vendor settlement invoice #13705"
+        },
+        "tenant_scrutiny_state": "CLEAN",
+        "sliding_window_n_minus_3": {
+            "window_size": 4,
+            "cumulative_outflow": 2423.0,
+            "history_sequence": [
+                {
+                    "t_minus": "14:25:00",
+                    "amt": 477.0,
+                    "bal": 68831.0,
+                    "to_dummy": false
+                },
+                {
+                    "t_minus": "14:50:00",
+                    "amt": 1042.0,
+                    "bal": 68354.0,
+                    "to_dummy": false
+                },
+                {
+                    "t_minus": "15:15:00",
+                    "amt": 662.0,
+                    "bal": 67312.0,
+                    "to_dummy": false
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0.09,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0.93,
+                "1": 0.06,
+                "2": 0,
+                "3": 0.01,
+                "4": 0
+            },
+            "confidence": 0.92
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "ALLOW": 0.94,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.01,
+                "WATCHLIST_REITERATE": 0.05
+            },
+            "confidence": 0.91
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+    ↳ Window Context: 3 prior txs in memory; cum. outflow: $2,423.00
+-------------------------------------------------------------------------------------------------------------------
+[15:45:00   ] [Tx #31] [CLEAN     ] tenant_clean_08    | Amt: $    427.00 | Bal: $ 50,221.00 | Risk: [░░░░] (0.01/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 413.4ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 427.0,
+            "account_balance": 50221.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T15:45:00",
+            "hour": 15,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "verified_vendor_690",
+                "account_age_days": 301,
+                "is_dummy": false
+            },
+            "memo": "Vendor settlement invoice #88656"
+        },
+        "tenant_scrutiny_state": "CLEAN"
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0.01,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 1,
+                "1": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0
+            },
+            "confidence": 0.99
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "WATCHLIST_REITERATE": 0,
+                "ALLOW": 1,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0
+            },
+            "confidence": 1
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+-------------------------------------------------------------------------------------------------------------------
+[15:55:00   ] [Tx #32] [CLEAN     ] tenant_clean_07    | Amt: $    159.00 | Bal: $ 30,359.00 | Risk: [░░░░] (0.05/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 372.0ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 159.0,
+            "account_balance": 30359.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T15:55:00",
+            "hour": 15,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "verified_vendor_360",
+                "account_age_days": 590,
+                "is_dummy": false
+            },
+            "memo": "Vendor settlement invoice #43914"
+        },
+        "tenant_scrutiny_state": "CLEAN",
+        "sliding_window_n_minus_3": {
+            "window_size": 3,
+            "cumulative_outflow": 1681.0,
+            "history_sequence": [
+                {
+                    "t_minus": "15:05:00",
+                    "amt": 825.0,
+                    "bal": 31881.0,
+                    "to_dummy": false
+                },
+                {
+                    "t_minus": "15:30:00",
+                    "amt": 697.0,
+                    "bal": 31056.0,
+                    "to_dummy": false
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0.05,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0.97,
+                "1": 0.03,
+                "2": 0,
+                "3": 0,
+                "4": 0
+            },
+            "confidence": 0.96
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "ALLOW": 0.93,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.01,
+                "WATCHLIST_REITERATE": 0.05
+            },
+            "confidence": 0.9
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+    ↳ Window Context: 2 prior txs in memory; cum. outflow: $1,681.00
+-------------------------------------------------------------------------------------------------------------------
+[16:10:00   ] [Tx #33] [CLEAN     ] tenant_clean_08    | Amt: $    241.00 | Bal: $ 49,794.00 | Risk: [░░░░] (0.11/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 388.2ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 241.0,
+            "account_balance": 49794.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T16:10:00",
+            "hour": 16,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "verified_vendor_181",
+                "account_age_days": 648,
+                "is_dummy": false
+            },
+            "memo": "Vendor settlement invoice #49089"
+        },
+        "tenant_scrutiny_state": "CLEAN",
+        "sliding_window_n_minus_3": {
+            "window_size": 2,
+            "cumulative_outflow": 668.0,
+            "history_sequence": [
+                {
+                    "t_minus": "15:45:00",
+                    "amt": 427.0,
+                    "bal": 50221.0,
+                    "to_dummy": false
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0.11,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0.9,
+                "1": 0.09,
+                "2": 0.01,
+                "3": 0,
+                "4": 0
+            },
+            "confidence": 0.9
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "WATCHLIST_REITERATE": 0.13,
+                "ALLOW": 0.84,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.03
+            },
+            "confidence": 0.75
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+    ↳ Window Context: 1 prior txs in memory; cum. outflow: $668.00
+-------------------------------------------------------------------------------------------------------------------
+[16:20:00   ] [Tx #34] [CLEAN     ] tenant_clean_07    | Amt: $    706.00 | Bal: $ 30,200.00 | Risk: [░░░░] (0.18/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 378.4ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 706.0,
+            "account_balance": 30200.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T16:20:00",
+            "hour": 16,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "verified_vendor_319",
+                "account_age_days": 230,
+                "is_dummy": false
+            },
+            "memo": "Vendor settlement invoice #90490"
+        },
+        "tenant_scrutiny_state": "CLEAN",
+        "sliding_window_n_minus_3": {
+            "window_size": 4,
+            "cumulative_outflow": 2387.0,
+            "history_sequence": [
+                {
+                    "t_minus": "15:05:00",
+                    "amt": 825.0,
+                    "bal": 31881.0,
+                    "to_dummy": false
+                },
+                {
+                    "t_minus": "15:30:00",
+                    "amt": 697.0,
+                    "bal": 31056.0,
+                    "to_dummy": false
+                },
+                {
+                    "t_minus": "15:55:00",
+                    "amt": 159.0,
+                    "bal": 30359.0,
+                    "to_dummy": false
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0.18,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0.87,
+                "1": 0.11,
+                "2": 0.01,
+                "3": 0.01,
+                "4": 0
+            },
+            "confidence": 0.85
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "WATCHLIST_REITERATE": 0.08,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.01,
+                "ALLOW": 0.91
+            },
+            "confidence": 0.87
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+    ↳ Window Context: 3 prior txs in memory; cum. outflow: $2,387.00
+-------------------------------------------------------------------------------------------------------------------
+[16:35:00   ] [Tx #35] [CLEAN     ] tenant_clean_08    | Amt: $    440.00 | Bal: $ 49,553.00 | Risk: [░░░░] (0.11/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 458.4ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 440.0,
+            "account_balance": 49553.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T16:35:00",
+            "hour": 16,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "verified_vendor_499",
+                "account_age_days": 431,
+                "is_dummy": false
+            },
+            "memo": "Vendor settlement invoice #43920"
+        },
+        "tenant_scrutiny_state": "CLEAN",
+        "sliding_window_n_minus_3": {
+            "window_size": 3,
+            "cumulative_outflow": 1108.0,
+            "history_sequence": [
+                {
+                    "t_minus": "15:45:00",
+                    "amt": 427.0,
+                    "bal": 50221.0,
+                    "to_dummy": false
+                },
+                {
+                    "t_minus": "16:10:00",
+                    "amt": 241.0,
+                    "bal": 49794.0,
+                    "to_dummy": false
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0.11,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0.91,
+                "1": 0.08,
+                "2": 0,
+                "3": 0.01,
+                "4": 0
+            },
+            "confidence": 0.91
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "WATCHLIST_REITERATE": 0.09,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.02,
+                "ALLOW": 0.89
+            },
+            "confidence": 0.84
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+    ↳ Window Context: 2 prior txs in memory; cum. outflow: $1,108.00
+-------------------------------------------------------------------------------------------------------------------
+[17:00:00   ] [Tx #36] [CLEAN     ] tenant_clean_08    | Amt: $    415.00 | Bal: $ 49,113.00 | Risk: [░░░░] (0.07/4) | Breach: 0.02 | 🟢 ALLOW                        | ⚡ 714.3ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 415.0,
+            "account_balance": 49113.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-19T17:00:00",
+            "hour": 17,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "verified_vendor_799",
+                "account_age_days": 238,
+                "is_dummy": false
+            },
+            "memo": "Vendor settlement invoice #69217"
+        },
+        "tenant_scrutiny_state": "CLEAN",
+        "sliding_window_n_minus_3": {
+            "window_size": 4,
+            "cumulative_outflow": 1523.0,
+            "history_sequence": [
+                {
+                    "t_minus": "15:45:00",
+                    "amt": 427.0,
+                    "bal": 50221.0,
+                    "to_dummy": false
+                },
+                {
+                    "t_minus": "16:10:00",
+                    "amt": 241.0,
+                    "bal": 49794.0,
+                    "to_dummy": false
+                },
+                {
+                    "t_minus": "16:35:00",
+                    "amt": 440.0,
+                    "bal": 49553.0,
+                    "to_dummy": false
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.02
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 0.07,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0.95,
+                "1": 0.05,
+                "2": 0,
+                "3": 0,
+                "4": 0
+            },
+            "confidence": 0.94
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "ALLOW",
+            "probabilities": {
+                "WATCHLIST_REITERATE": 0.04,
+                "ALLOW": 0.96,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0
+            },
+            "confidence": 0.94
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> CLEAN
+    ↳ Window Context: 3 prior txs in memory; cum. outflow: $1,523.00
+-------------------------------------------------------------------------------------------------------------------
+[09-20 02:00] [Tx #37] [SLOW_HACK ] tenant_slow_hack   | Amt: $  2,500.00 | Bal: $  3,620.00 | Risk: [████] (3.88/4) | Breach: 0.03 | 🔴 TRIP_CIRCUIT_BREAKER_AND_LOCK | ⚡ 511.2ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 2500.0,
+            "account_balance": 3620.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-20T02:00:00",
+            "hour": 2,
+            "is_off_hours": true,
+            "recipient": {
+                "id": "burner_sybil_0x335b",
+                "account_age_days": 0.02,
+                "is_dummy": true
+            },
+            "memo": "liquidity_node_shift_alpha"
+        },
+        "tenant_scrutiny_state": "LOCKED",
+        "sliding_window_n_minus_3": {
+            "window_size": 4,
+            "cumulative_outflow": 3855.0,
+            "history_sequence": [
+                {
+                    "t_minus": "09-18 19:30",
+                    "amt": 120.0,
+                    "bal": 4975.0,
+                    "to_dummy": false
+                },
+                {
+                    "t_minus": "09-19 01:15",
+                    "amt": 1200.0,
+                    "bal": 4855.0,
+                    "to_dummy": true
+                },
+                {
+                    "t_minus": "09-19 08:30",
+                    "amt": 35.0,
+                    "bal": 3655.0,
+                    "to_dummy": false
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.03
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 3.88,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0,
+                "1": 0,
+                "2": 0,
+                "3": 0.11,
+                "4": 0.89
+            },
+            "confidence": 0.9
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+            "probabilities": {
+                "WATCHLIST_REITERATE": 0.04,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.96,
+                "ALLOW": 0
+            },
+            "confidence": 0.94
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> LOCKED
+    ↳ Window Context: 3 prior txs in memory; cum. outflow: $3,855.00
+-------------------------------------------------------------------------------------------------------------------
+[03:14:13   ] [Tx #38] [FAST_HACK ] tenant_fast_hack   | Amt: $1,000,000.00 | Bal: $      0.00 | Risk: [████] (3.98/4) | Breach: 0.99 | 🔴 TRIP_CIRCUIT_BREAKER_AND_LOCK | ⚡ 510.4ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 1000000.0,
+            "account_balance": 0.0,
+            "is_balance_sufficient": false,
+            "timestamp": "2026-09-20T03:14:13.500000",
+            "hour": 3,
+            "is_off_hours": true,
+            "recipient": {
+                "id": "burner_dummy_wallet_0x4e7a6",
+                "account_age_days": 0.01,
+                "is_dummy": true
+            },
+            "memo": "burst_drain_batch_chunk_1"
+        },
+        "tenant_scrutiny_state": "CLEAN"
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.99
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 3.98,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0,
+                "1": 0,
+                "2": 0,
+                "3": 0.01,
+                "4": 0.99
+            },
+            "confidence": 0.99
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+            "probabilities": {
+                "WATCHLIST_REITERATE": 0.04,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.96,
+                "ALLOW": 0
+            },
+            "confidence": 0.94
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> LOCKED
+-------------------------------------------------------------------------------------------------------------------
+[03:14:17   ] [Tx #39] [FAST_HACK ] tenant_fast_hack   | Amt: $1,000,000.00 | Bal: $      0.00 | Risk: [████] (4.00/4) | Breach: 1.00 | 🔴 DROPPED_ALREADY_LOCKED       | ⚡   0.0ms
+    ↳ Reason: Account already suspended by circuit breaker. Execution halted.
+-------------------------------------------------------------------------------------------------------------------
+[03:14:20   ] [Tx #40] [FAST_HACK ] tenant_fast_hack   | Amt: $1,000,000.00 | Bal: $      0.00 | Risk: [████] (4.00/4) | Breach: 1.00 | 🔴 DROPPED_ALREADY_LOCKED       | ⚡   0.0ms
+    ↳ Reason: Account already suspended by circuit breaker. Execution halted.
+-------------------------------------------------------------------------------------------------------------------
+[03:14:24   ] [Tx #41] [FAST_HACK ] tenant_fast_hack   | Amt: $1,000,000.00 | Bal: $      0.00 | Risk: [████] (4.00/4) | Breach: 1.00 | 🔴 DROPPED_ALREADY_LOCKED       | ⚡   0.0ms
+    ↳ Reason: Account already suspended by circuit breaker. Execution halted.
+-------------------------------------------------------------------------------------------------------------------
+[03:14:27   ] [Tx #42] [FAST_HACK ] tenant_fast_hack   | Amt: $1,000,000.00 | Bal: $      0.00 | Risk: [████] (4.00/4) | Breach: 1.00 | 🔴 DROPPED_ALREADY_LOCKED       | ⚡   0.0ms
+    ↳ Reason: Account already suspended by circuit breaker. Execution halted.
+-------------------------------------------------------------------------------------------------------------------
+[03:14:31   ] [Tx #43] [FAST_HACK ] tenant_fast_hack   | Amt: $1,000,000.00 | Bal: $      0.00 | Risk: [████] (4.00/4) | Breach: 1.00 | 🔴 DROPPED_ALREADY_LOCKED       | ⚡   0.0ms
+    ↳ Reason: Account already suspended by circuit breaker. Execution halted.
+-------------------------------------------------------------------------------------------------------------------
+[09-20 11:15] [Tx #44] [SLOW_HACK ] tenant_slow_hack   | Amt: $     55.00 | Bal: $  1,120.00 | Risk: [████] (3.56/4) | Breach: 0.03 | 🔴 TRIP_CIRCUIT_BREAKER_AND_LOCK | ⚡ 511.8ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 55.0,
+            "account_balance": 1120.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-20T11:15:00",
+            "hour": 11,
+            "is_off_hours": false,
+            "recipient": {
+                "id": "known_verified_vendor",
+                "account_age_days": 350,
+                "is_dummy": false
+            },
+            "memo": "office_courier_delivery"
+        },
+        "tenant_scrutiny_state": "LOCKED",
+        "sliding_window_n_minus_3": {
+            "window_size": 4,
+            "cumulative_outflow": 3790.0,
+            "history_sequence": [
+                {
+                    "t_minus": "09-19 01:15",
+                    "amt": 1200.0,
+                    "bal": 4855.0,
+                    "to_dummy": true
+                },
+                {
+                    "t_minus": "09-19 08:30",
+                    "amt": 35.0,
+                    "bal": 3655.0,
+                    "to_dummy": false
+                },
+                {
+                    "t_minus": "09-20 02:00",
+                    "amt": 2500.0,
+                    "bal": 3620.0,
+                    "to_dummy": true
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.03
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 3.56,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0.04,
+                "1": 0.02,
+                "2": 0.02,
+                "3": 0.18,
+                "4": 0.74
+            },
+            "confidence": 0.63
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+            "probabilities": {
+                "WATCHLIST_REITERATE": 0.16,
+                "ALLOW": 0.04,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.8
+            },
+            "confidence": 0.71
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> LOCKED
+    ↳ Window Context: 3 prior txs in memory; cum. outflow: $3,790.00
+-------------------------------------------------------------------------------------------------------------------
+[09-21 02:45] [Tx #45] [SLOW_HACK ] tenant_slow_hack   | Amt: $    980.00 | Bal: $  1,065.00 | Risk: [████] (3.93/4) | Breach: 0.03 | 🔴 TRIP_CIRCUIT_BREAKER_AND_LOCK | ⚡ 438.3ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 980.0,
+            "account_balance": 1065.0,
+            "is_balance_sufficient": true,
+            "timestamp": "2026-09-21T02:45:00",
+            "hour": 2,
+            "is_off_hours": true,
+            "recipient": {
+                "id": "burner_sybil_0xfaff",
+                "account_age_days": 0.02,
+                "is_dummy": true
+            },
+            "memo": "fast_bridge_sweep_01"
+        },
+        "tenant_scrutiny_state": "LOCKED",
+        "sliding_window_n_minus_3": {
+            "window_size": 4,
+            "cumulative_outflow": 3570.0,
+            "history_sequence": [
+                {
+                    "t_minus": "09-19 08:30",
+                    "amt": 35.0,
+                    "bal": 3655.0,
+                    "to_dummy": false
+                },
+                {
+                    "t_minus": "09-20 02:00",
+                    "amt": 2500.0,
+                    "bal": 3620.0,
+                    "to_dummy": true
+                },
+                {
+                    "t_minus": "09-20 11:15",
+                    "amt": 55.0,
+                    "bal": 1120.0,
+                    "to_dummy": false
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.03
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 3.93,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0,
+                "1": 0,
+                "2": 0,
+                "3": 0.06,
+                "4": 0.94
+            },
+            "confidence": 0.94
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+            "probabilities": {
+                "WATCHLIST_REITERATE": 0.03,
+                "ALLOW": 0,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.97
+            },
+            "confidence": 0.96
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> LOCKED
+    ↳ Window Context: 3 prior txs in memory; cum. outflow: $3,570.00
+-------------------------------------------------------------------------------------------------------------------
+[09-21 03:15] [Tx #46] [SLOW_HACK ] tenant_slow_hack   | Amt: $  5,000.00 | Bal: $     85.00 | Risk: [████] (3.98/4) | Breach: 0.99 | 🔴 TRIP_CIRCUIT_BREAKER_AND_LOCK | ⚡ 390.4ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 5000.0,
+            "account_balance": 85.0,
+            "is_balance_sufficient": false,
+            "timestamp": "2026-09-21T03:15:00",
+            "hour": 3,
+            "is_off_hours": true,
+            "recipient": {
+                "id": "burner_sybil_0x6f11",
+                "account_age_days": 0.02,
+                "is_dummy": true
+            },
+            "memo": "fast_bridge_sweep_02"
+        },
+        "tenant_scrutiny_state": "LOCKED",
+        "sliding_window_n_minus_3": {
+            "window_size": 4,
+            "cumulative_outflow": 8535.0,
+            "history_sequence": [
+                {
+                    "t_minus": "09-20 02:00",
+                    "amt": 2500.0,
+                    "bal": 3620.0,
+                    "to_dummy": true
+                },
+                {
+                    "t_minus": "09-20 11:15",
+                    "amt": 55.0,
+                    "bal": 1120.0,
+                    "to_dummy": false
+                },
+                {
+                    "t_minus": "09-21 02:45",
+                    "amt": 980.0,
+                    "bal": 1065.0,
+                    "to_dummy": true
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.99
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 3.98,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0,
+                "1": 0,
+                "2": 0,
+                "3": 0.01,
+                "4": 0.99
+            },
+            "confidence": 0.99
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+            "probabilities": {
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 1,
+                "ALLOW": 0,
+                "WATCHLIST_REITERATE": 0
+            },
+            "confidence": 0.99
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> LOCKED
+    ↳ Window Context: 3 prior txs in memory; cum. outflow: $8,535.00
+-------------------------------------------------------------------------------------------------------------------
+[09-21 03:45] [Tx #47] [SLOW_HACK ] tenant_slow_hack   | Amt: $250,000.00 | Bal: $      0.00 | Risk: [████] (3.98/4) | Breach: 0.99 | 🔴 TRIP_CIRCUIT_BREAKER_AND_LOCK | ⚡ 498.1ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 250000.0,
+            "account_balance": 0.0,
+            "is_balance_sufficient": false,
+            "timestamp": "2026-09-21T03:45:00",
+            "hour": 3,
+            "is_off_hours": true,
+            "recipient": {
+                "id": "burner_sybil_0x34ea",
+                "account_age_days": 0.02,
+                "is_dummy": true
+            },
+            "memo": "treasury_unpegged_drain"
+        },
+        "tenant_scrutiny_state": "LOCKED",
+        "sliding_window_n_minus_3": {
+            "window_size": 4,
+            "cumulative_outflow": 256035.0,
+            "history_sequence": [
+                {
+                    "t_minus": "09-20 11:15",
+                    "amt": 55.0,
+                    "bal": 1120.0,
+                    "to_dummy": false
+                },
+                {
+                    "t_minus": "09-21 02:45",
+                    "amt": 980.0,
+                    "bal": 1065.0,
+                    "to_dummy": true
+                },
+                {
+                    "t_minus": "09-21 03:15",
+                    "amt": 5000.0,
+                    "bal": 85.0,
+                    "to_dummy": true
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.99
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 3.98,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0,
+                "1": 0,
+                "2": 0,
+                "3": 0.01,
+                "4": 0.99
+            },
+            "confidence": 0.98
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+            "probabilities": {
+                "WATCHLIST_REITERATE": 0,
+                "ALLOW": 0,
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 1
+            },
+            "confidence": 1
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> LOCKED
+    ↳ Window Context: 3 prior txs in memory; cum. outflow: $256,035.00
+-------------------------------------------------------------------------------------------------------------------
+[09-21 04:15] [Tx #48] [SLOW_HACK ] tenant_slow_hack   | Amt: $1,000,000.00 | Bal: $      0.00 | Risk: [████] (3.98/4) | Breach: 0.99 | 🔴 TRIP_CIRCUIT_BREAKER_AND_LOCK | ⚡ 510.8ms
+    ── [PROMPT / STATE SENT TO JEV] ──
+    {
+        "current_tx": {
+            "amount": 1000000.0,
+            "account_balance": 0.0,
+            "is_balance_sufficient": false,
+            "timestamp": "2026-09-21T04:15:00",
+            "hour": 4,
+            "is_off_hours": true,
+            "recipient": {
+                "id": "burner_sybil_0xea80",
+                "account_age_days": 0.02,
+                "is_dummy": true
+            },
+            "memo": "final_settlement_outflow"
+        },
+        "tenant_scrutiny_state": "LOCKED",
+        "sliding_window_n_minus_3": {
+            "window_size": 4,
+            "cumulative_outflow": 1255980.0,
+            "history_sequence": [
+                {
+                    "t_minus": "09-21 02:45",
+                    "amt": 980.0,
+                    "bal": 1065.0,
+                    "to_dummy": true
+                },
+                {
+                    "t_minus": "09-21 03:15",
+                    "amt": 5000.0,
+                    "bal": 85.0,
+                    "to_dummy": true
+                },
+                {
+                    "t_minus": "09-21 03:45",
+                    "amt": 250000.0,
+                    "bal": 0.0,
+                    "to_dummy": true
+                }
+            ]
+        }
+    }
+    ── [JEV MODEL OUTPUT RECEIVED] ──
+    {
+        "solvency_breach": {
+            "type": "noul",
+            "noul": 0.99
+        },
+        "sybil_drain_risk": {
+            "type": "score",
+            "score": 3.98,
+            "legend": {
+                "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+                "1": "Score 1: Minor anomaly or low-risk variance.",
+                "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+                "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+                "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+            },
+            "probabilities": {
+                "0": 0,
+                "1": 0,
+                "2": 0,
+                "3": 0.01,
+                "4": 0.99
+            },
+            "confidence": 0.98
+        },
+        "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+            "probabilities": {
+                "TRIP_CIRCUIT_BREAKER_AND_LOCK": 1,
+                "WATCHLIST_REITERATE": 0,
+                "ALLOW": 0
+            },
+            "confidence": 1
+        }
+    }
+    ↳ Reason: Adaptive State updated to -> LOCKED
+    ↳ Window Context: 3 prior txs in memory; cum. outflow: $1,255,980.00
+-------------------------------------------------------------------------------------------------------------------

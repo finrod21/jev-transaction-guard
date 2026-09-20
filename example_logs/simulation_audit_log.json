@@ -1,0 +1,3535 @@
+[
+  {
+    "seq": 1,
+    "tx_time": "09-18 14:15",
+    "tenant_id": "tenant_slow_hack",
+    "tenant_type": "SLOW_HACK",
+    "amount": 25.0,
+    "balance": 5000.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.0,
+    "verdict": "ALLOW",
+    "latency_ms": 718.2492880019709,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 25.0,
+        "account_balance": 5000.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-18T14:15:00",
+        "hour": 14,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "known_verified_vendor",
+          "account_age_days": 350,
+          "is_dummy": false
+        },
+        "memo": "saas_dev_subscription"
+      },
+      "tenant_scrutiny_state": "CLEAN"
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 1,
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        },
+        "confidence": 1
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "WATCHLIST_REITERATE": 0,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0,
+          "ALLOW": 1
+        },
+        "confidence": 1
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": ""
+  },
+  {
+    "seq": 2,
+    "tx_time": "09-18 19:30",
+    "tenant_id": "tenant_slow_hack",
+    "tenant_type": "SLOW_HACK",
+    "amount": 120.0,
+    "balance": 4975.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.1,
+    "verdict": "ALLOW",
+    "latency_ms": 397.7615910007444,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 120.0,
+        "account_balance": 4975.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-18T19:30:00",
+        "hour": 19,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "known_verified_vendor",
+          "account_age_days": 350,
+          "is_dummy": false
+        },
+        "memo": "client_dinner_reimbursement"
+      },
+      "tenant_scrutiny_state": "CLEAN",
+      "sliding_window_n_minus_3": {
+        "window_size": 2,
+        "cumulative_outflow": 145.0,
+        "history_sequence": [
+          {
+            "t_minus": "09-18 14:15",
+            "amt": 25.0,
+            "bal": 5000.0,
+            "to_dummy": false
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0.1,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0.92,
+          "1": 0.08,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        },
+        "confidence": 0.92
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "WATCHLIST_REITERATE": 0.11,
+          "ALLOW": 0.87,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.02
+        },
+        "confidence": 0.8
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": "1 prior txs in memory; cum. outflow: $145.00"
+  },
+  {
+    "seq": 3,
+    "tx_time": "09-19 01:15",
+    "tenant_id": "tenant_slow_hack",
+    "tenant_type": "SLOW_HACK",
+    "amount": 1200.0,
+    "balance": 4855.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 3.56,
+    "verdict": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+    "latency_ms": 520.5922400018608,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 1200.0,
+        "account_balance": 4855.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T01:15:00",
+        "hour": 1,
+        "is_off_hours": true,
+        "recipient": {
+          "id": "burner_sybil_0xdd46",
+          "account_age_days": 0.02,
+          "is_dummy": true
+        },
+        "memo": "crypto_gateway_test_transfer"
+      },
+      "tenant_scrutiny_state": "CLEAN",
+      "sliding_window_n_minus_3": {
+        "window_size": 3,
+        "cumulative_outflow": 1345.0,
+        "history_sequence": [
+          {
+            "t_minus": "09-18 14:15",
+            "amt": 25.0,
+            "bal": 5000.0,
+            "to_dummy": false
+          },
+          {
+            "t_minus": "09-18 19:30",
+            "amt": 120.0,
+            "bal": 4975.0,
+            "to_dummy": false
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 3.56,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0,
+          "1": 0,
+          "2": 0.06,
+          "3": 0.31,
+          "4": 0.63
+        },
+        "confidence": 0.64
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+        "probabilities": {
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.69,
+          "ALLOW": 0.03,
+          "WATCHLIST_REITERATE": 0.28
+        },
+        "confidence": 0.53
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> LOCKED",
+    "history_summary": "2 prior txs in memory; cum. outflow: $1,345.00"
+  },
+  {
+    "seq": 4,
+    "tx_time": "09-19 08:30",
+    "tenant_id": "tenant_slow_hack",
+    "tenant_type": "SLOW_HACK",
+    "amount": 35.0,
+    "balance": 3655.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 3.51,
+    "verdict": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+    "latency_ms": 613.4762410001713,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 35.0,
+        "account_balance": 3655.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T08:30:00",
+        "hour": 8,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "known_verified_vendor",
+          "account_age_days": 350,
+          "is_dummy": false
+        },
+        "memo": "aws_hosting_monthly_bill"
+      },
+      "tenant_scrutiny_state": "LOCKED",
+      "sliding_window_n_minus_3": {
+        "window_size": 4,
+        "cumulative_outflow": 1380.0,
+        "history_sequence": [
+          {
+            "t_minus": "09-18 14:15",
+            "amt": 25.0,
+            "bal": 5000.0,
+            "to_dummy": false
+          },
+          {
+            "t_minus": "09-18 19:30",
+            "amt": 120.0,
+            "bal": 4975.0,
+            "to_dummy": false
+          },
+          {
+            "t_minus": "09-19 01:15",
+            "amt": 1200.0,
+            "bal": 4855.0,
+            "to_dummy": true
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 3.51,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0.04,
+          "1": 0.02,
+          "2": 0.03,
+          "3": 0.21,
+          "4": 0.7
+        },
+        "confidence": 0.59
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+        "probabilities": {
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.79,
+          "WATCHLIST_REITERATE": 0.15,
+          "ALLOW": 0.06
+        },
+        "confidence": 0.69
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> LOCKED",
+    "history_summary": "3 prior txs in memory; cum. outflow: $1,380.00"
+  },
+  {
+    "seq": 5,
+    "tx_time": "11:05:00",
+    "tenant_id": "tenant_clean_01",
+    "tenant_type": "CLEAN",
+    "amount": 663.0,
+    "balance": 77071.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.01,
+    "verdict": "ALLOW",
+    "latency_ms": 634.3225089985935,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 663.0,
+        "account_balance": 77071.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T11:05:00",
+        "hour": 11,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "verified_vendor_373",
+          "account_age_days": 436,
+          "is_dummy": false
+        },
+        "memo": "Vendor settlement invoice #83039"
+      },
+      "tenant_scrutiny_state": "CLEAN"
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0.01,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 1,
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        },
+        "confidence": 1
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "WATCHLIST_REITERATE": 0,
+          "ALLOW": 1,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0
+        },
+        "confidence": 1
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": ""
+  },
+  {
+    "seq": 6,
+    "tx_time": "11:30:00",
+    "tenant_id": "tenant_clean_01",
+    "tenant_type": "CLEAN",
+    "amount": 566.0,
+    "balance": 76408.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.1,
+    "verdict": "ALLOW",
+    "latency_ms": 487.91833499853965,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 566.0,
+        "account_balance": 76408.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T11:30:00",
+        "hour": 11,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "verified_vendor_388",
+          "account_age_days": 760,
+          "is_dummy": false
+        },
+        "memo": "Vendor settlement invoice #56722"
+      },
+      "tenant_scrutiny_state": "CLEAN",
+      "sliding_window_n_minus_3": {
+        "window_size": 2,
+        "cumulative_outflow": 1229.0,
+        "history_sequence": [
+          {
+            "t_minus": "11:05:00",
+            "amt": 663.0,
+            "bal": 77071.0,
+            "to_dummy": false
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0.1,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0.92,
+          "1": 0.07,
+          "2": 0,
+          "3": 0.01,
+          "4": 0
+        },
+        "confidence": 0.91
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.03,
+          "ALLOW": 0.88,
+          "WATCHLIST_REITERATE": 0.09
+        },
+        "confidence": 0.83
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": "1 prior txs in memory; cum. outflow: $1,229.00"
+  },
+  {
+    "seq": 7,
+    "tx_time": "11:45:00",
+    "tenant_id": "tenant_clean_02",
+    "tenant_type": "CLEAN",
+    "amount": 427.0,
+    "balance": 70956.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.01,
+    "verdict": "ALLOW",
+    "latency_ms": 375.3050420018553,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 427.0,
+        "account_balance": 70956.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T11:45:00",
+        "hour": 11,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "verified_vendor_213",
+          "account_age_days": 540,
+          "is_dummy": false
+        },
+        "memo": "Vendor settlement invoice #39507"
+      },
+      "tenant_scrutiny_state": "CLEAN"
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0.01,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 1,
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        },
+        "confidence": 1
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "WATCHLIST_REITERATE": 0,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0,
+          "ALLOW": 1
+        },
+        "confidence": 1
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": ""
+  },
+  {
+    "seq": 8,
+    "tx_time": "11:55:00",
+    "tenant_id": "tenant_clean_01",
+    "tenant_type": "CLEAN",
+    "amount": 488.0,
+    "balance": 75842.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.05,
+    "verdict": "ALLOW",
+    "latency_ms": 537.0576739987882,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 488.0,
+        "account_balance": 75842.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T11:55:00",
+        "hour": 11,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "verified_vendor_742",
+          "account_age_days": 708,
+          "is_dummy": false
+        },
+        "memo": "Vendor settlement invoice #86978"
+      },
+      "tenant_scrutiny_state": "CLEAN",
+      "sliding_window_n_minus_3": {
+        "window_size": 3,
+        "cumulative_outflow": 1717.0,
+        "history_sequence": [
+          {
+            "t_minus": "11:05:00",
+            "amt": 663.0,
+            "bal": 77071.0,
+            "to_dummy": false
+          },
+          {
+            "t_minus": "11:30:00",
+            "amt": 566.0,
+            "bal": 76408.0,
+            "to_dummy": false
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0.05,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0.97,
+          "1": 0.03,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        },
+        "confidence": 0.96
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "WATCHLIST_REITERATE": 0.06,
+          "ALLOW": 0.93,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.01
+        },
+        "confidence": 0.89
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": "2 prior txs in memory; cum. outflow: $1,717.00"
+  },
+  {
+    "seq": 9,
+    "tx_time": "12:10:00",
+    "tenant_id": "tenant_clean_02",
+    "tenant_type": "CLEAN",
+    "amount": 609.0,
+    "balance": 70529.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.15,
+    "verdict": "ALLOW",
+    "latency_ms": 518.3957839981304,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 609.0,
+        "account_balance": 70529.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T12:10:00",
+        "hour": 12,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "verified_vendor_105",
+          "account_age_days": 148,
+          "is_dummy": false
+        },
+        "memo": "Vendor settlement invoice #57797"
+      },
+      "tenant_scrutiny_state": "CLEAN",
+      "sliding_window_n_minus_3": {
+        "window_size": 2,
+        "cumulative_outflow": 1036.0,
+        "history_sequence": [
+          {
+            "t_minus": "11:45:00",
+            "amt": 427.0,
+            "bal": 70956.0,
+            "to_dummy": false
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0.15,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0.88,
+          "1": 0.1,
+          "2": 0.01,
+          "3": 0.01,
+          "4": 0
+        },
+        "confidence": 0.87
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "WATCHLIST_REITERATE": 0.1,
+          "ALLOW": 0.88,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.02
+        },
+        "confidence": 0.82
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": "1 prior txs in memory; cum. outflow: $1,036.00"
+  },
+  {
+    "seq": 10,
+    "tx_time": "12:20:00",
+    "tenant_id": "tenant_clean_01",
+    "tenant_type": "CLEAN",
+    "amount": 357.0,
+    "balance": 75354.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.09,
+    "verdict": "ALLOW",
+    "latency_ms": 950.8355139987543,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 357.0,
+        "account_balance": 75354.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T12:20:00",
+        "hour": 12,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "verified_vendor_511",
+          "account_age_days": 746,
+          "is_dummy": false
+        },
+        "memo": "Vendor settlement invoice #64838"
+      },
+      "tenant_scrutiny_state": "CLEAN",
+      "sliding_window_n_minus_3": {
+        "window_size": 4,
+        "cumulative_outflow": 2074.0,
+        "history_sequence": [
+          {
+            "t_minus": "11:05:00",
+            "amt": 663.0,
+            "bal": 77071.0,
+            "to_dummy": false
+          },
+          {
+            "t_minus": "11:30:00",
+            "amt": 566.0,
+            "bal": 76408.0,
+            "to_dummy": false
+          },
+          {
+            "t_minus": "11:55:00",
+            "amt": 488.0,
+            "bal": 75842.0,
+            "to_dummy": false
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0.09,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0.93,
+          "1": 0.06,
+          "2": 0,
+          "3": 0.01,
+          "4": 0
+        },
+        "confidence": 0.92
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "WATCHLIST_REITERATE": 0.04,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0,
+          "ALLOW": 0.96
+        },
+        "confidence": 0.94
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": "3 prior txs in memory; cum. outflow: $2,074.00"
+  },
+  {
+    "seq": 11,
+    "tx_time": "12:25:00",
+    "tenant_id": "tenant_clean_03",
+    "tenant_type": "CLEAN",
+    "amount": 311.0,
+    "balance": 56467.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.03,
+    "verdict": "ALLOW",
+    "latency_ms": 382.2532259982836,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 311.0,
+        "account_balance": 56467.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T12:25:00",
+        "hour": 12,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "verified_vendor_993",
+          "account_age_days": 137,
+          "is_dummy": false
+        },
+        "memo": "Vendor settlement invoice #23308"
+      },
+      "tenant_scrutiny_state": "CLEAN"
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0.03,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0.98,
+          "1": 0.01,
+          "2": 0.01,
+          "3": 0,
+          "4": 0
+        },
+        "confidence": 0.97
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0,
+          "WATCHLIST_REITERATE": 0,
+          "ALLOW": 1
+        },
+        "confidence": 1
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": ""
+  },
+  {
+    "seq": 12,
+    "tx_time": "12:35:00",
+    "tenant_id": "tenant_clean_02",
+    "tenant_type": "CLEAN",
+    "amount": 1161.0,
+    "balance": 69920.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.05,
+    "verdict": "ALLOW",
+    "latency_ms": 427.3591640012455,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 1161.0,
+        "account_balance": 69920.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T12:35:00",
+        "hour": 12,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "verified_vendor_863",
+          "account_age_days": 670,
+          "is_dummy": false
+        },
+        "memo": "Vendor settlement invoice #56474"
+      },
+      "tenant_scrutiny_state": "CLEAN",
+      "sliding_window_n_minus_3": {
+        "window_size": 3,
+        "cumulative_outflow": 2197.0,
+        "history_sequence": [
+          {
+            "t_minus": "11:45:00",
+            "amt": 427.0,
+            "bal": 70956.0,
+            "to_dummy": false
+          },
+          {
+            "t_minus": "12:10:00",
+            "amt": 609.0,
+            "bal": 70529.0,
+            "to_dummy": false
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0.05,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0.97,
+          "1": 0.03,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        },
+        "confidence": 0.96
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "ALLOW": 0.92,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.02,
+          "WATCHLIST_REITERATE": 0.06
+        },
+        "confidence": 0.88
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": "2 prior txs in memory; cum. outflow: $2,197.00"
+  },
+  {
+    "seq": 13,
+    "tx_time": "12:50:00",
+    "tenant_id": "tenant_clean_03",
+    "tenant_type": "CLEAN",
+    "amount": 1153.0,
+    "balance": 56156.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.07,
+    "verdict": "ALLOW",
+    "latency_ms": 386.3885249993473,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 1153.0,
+        "account_balance": 56156.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T12:50:00",
+        "hour": 12,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "verified_vendor_219",
+          "account_age_days": 605,
+          "is_dummy": false
+        },
+        "memo": "Vendor settlement invoice #50466"
+      },
+      "tenant_scrutiny_state": "CLEAN",
+      "sliding_window_n_minus_3": {
+        "window_size": 2,
+        "cumulative_outflow": 1464.0,
+        "history_sequence": [
+          {
+            "t_minus": "12:25:00",
+            "amt": 311.0,
+            "bal": 56467.0,
+            "to_dummy": false
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0.07,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0.95,
+          "1": 0.05,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        },
+        "confidence": 0.95
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.03,
+          "ALLOW": 0.87,
+          "WATCHLIST_REITERATE": 0.1
+        },
+        "confidence": 0.81
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": "1 prior txs in memory; cum. outflow: $1,464.00"
+  },
+  {
+    "seq": 14,
+    "tx_time": "13:00:00",
+    "tenant_id": "tenant_clean_02",
+    "tenant_type": "CLEAN",
+    "amount": 445.0,
+    "balance": 68759.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.15,
+    "verdict": "ALLOW",
+    "latency_ms": 508.2282529983786,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 445.0,
+        "account_balance": 68759.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T13:00:00",
+        "hour": 13,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "verified_vendor_232",
+          "account_age_days": 158,
+          "is_dummy": false
+        },
+        "memo": "Vendor settlement invoice #67970"
+      },
+      "tenant_scrutiny_state": "CLEAN",
+      "sliding_window_n_minus_3": {
+        "window_size": 4,
+        "cumulative_outflow": 2642.0,
+        "history_sequence": [
+          {
+            "t_minus": "11:45:00",
+            "amt": 427.0,
+            "bal": 70956.0,
+            "to_dummy": false
+          },
+          {
+            "t_minus": "12:10:00",
+            "amt": 609.0,
+            "bal": 70529.0,
+            "to_dummy": false
+          },
+          {
+            "t_minus": "12:35:00",
+            "amt": 1161.0,
+            "bal": 69920.0,
+            "to_dummy": false
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0.15,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0.88,
+          "1": 0.1,
+          "2": 0.01,
+          "3": 0.01,
+          "4": 0
+        },
+        "confidence": 0.87
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "ALLOW": 0.95,
+          "WATCHLIST_REITERATE": 0.05,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0
+        },
+        "confidence": 0.91
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": "3 prior txs in memory; cum. outflow: $2,642.00"
+  },
+  {
+    "seq": 15,
+    "tx_time": "13:05:00",
+    "tenant_id": "tenant_clean_04",
+    "tenant_type": "CLEAN",
+    "amount": 91.0,
+    "balance": 79876.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.0,
+    "verdict": "ALLOW",
+    "latency_ms": 463.4528839997074,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 91.0,
+        "account_balance": 79876.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T13:05:00",
+        "hour": 13,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "verified_vendor_797",
+          "account_age_days": 669,
+          "is_dummy": false
+        },
+        "memo": "Vendor settlement invoice #85496"
+      },
+      "tenant_scrutiny_state": "CLEAN"
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 1,
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        },
+        "confidence": 1
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "WATCHLIST_REITERATE": 0,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0,
+          "ALLOW": 1
+        },
+        "confidence": 1
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": ""
+  },
+  {
+    "seq": 16,
+    "tx_time": "13:15:00",
+    "tenant_id": "tenant_clean_03",
+    "tenant_type": "CLEAN",
+    "amount": 654.0,
+    "balance": 55003.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.06,
+    "verdict": "ALLOW",
+    "latency_ms": 556.7673069999728,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 654.0,
+        "account_balance": 55003.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T13:15:00",
+        "hour": 13,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "verified_vendor_248",
+          "account_age_days": 625,
+          "is_dummy": false
+        },
+        "memo": "Vendor settlement invoice #39110"
+      },
+      "tenant_scrutiny_state": "CLEAN",
+      "sliding_window_n_minus_3": {
+        "window_size": 3,
+        "cumulative_outflow": 2118.0,
+        "history_sequence": [
+          {
+            "t_minus": "12:25:00",
+            "amt": 311.0,
+            "bal": 56467.0,
+            "to_dummy": false
+          },
+          {
+            "t_minus": "12:50:00",
+            "amt": 1153.0,
+            "bal": 56156.0,
+            "to_dummy": false
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0.06,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0.96,
+          "1": 0.04,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        },
+        "confidence": 0.95
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "WATCHLIST_REITERATE": 0.08,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.01,
+          "ALLOW": 0.91
+        },
+        "confidence": 0.86
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": "2 prior txs in memory; cum. outflow: $2,118.00"
+  },
+  {
+    "seq": 17,
+    "tx_time": "13:30:00",
+    "tenant_id": "tenant_clean_04",
+    "tenant_type": "CLEAN",
+    "amount": 53.0,
+    "balance": 79785.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.1,
+    "verdict": "ALLOW",
+    "latency_ms": 341.79542300262256,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 53.0,
+        "account_balance": 79785.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T13:30:00",
+        "hour": 13,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "verified_vendor_934",
+          "account_age_days": 164,
+          "is_dummy": false
+        },
+        "memo": "Vendor settlement invoice #79011"
+      },
+      "tenant_scrutiny_state": "CLEAN",
+      "sliding_window_n_minus_3": {
+        "window_size": 2,
+        "cumulative_outflow": 144.0,
+        "history_sequence": [
+          {
+            "t_minus": "13:05:00",
+            "amt": 91.0,
+            "bal": 79876.0,
+            "to_dummy": false
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0.1,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0.92,
+          "1": 0.07,
+          "2": 0.01,
+          "3": 0,
+          "4": 0
+        },
+        "confidence": 0.91
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "WATCHLIST_REITERATE": 0.1,
+          "ALLOW": 0.88,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.02
+        },
+        "confidence": 0.82
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": "1 prior txs in memory; cum. outflow: $144.00"
+  },
+  {
+    "seq": 18,
+    "tx_time": "13:40:00",
+    "tenant_id": "tenant_clean_03",
+    "tenant_type": "CLEAN",
+    "amount": 1165.0,
+    "balance": 54349.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.08,
+    "verdict": "ALLOW",
+    "latency_ms": 469.3761620001169,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 1165.0,
+        "account_balance": 54349.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T13:40:00",
+        "hour": 13,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "verified_vendor_445",
+          "account_age_days": 554,
+          "is_dummy": false
+        },
+        "memo": "Vendor settlement invoice #19968"
+      },
+      "tenant_scrutiny_state": "CLEAN",
+      "sliding_window_n_minus_3": {
+        "window_size": 4,
+        "cumulative_outflow": 3283.0,
+        "history_sequence": [
+          {
+            "t_minus": "12:25:00",
+            "amt": 311.0,
+            "bal": 56467.0,
+            "to_dummy": false
+          },
+          {
+            "t_minus": "12:50:00",
+            "amt": 1153.0,
+            "bal": 56156.0,
+            "to_dummy": false
+          },
+          {
+            "t_minus": "13:15:00",
+            "amt": 654.0,
+            "bal": 55003.0,
+            "to_dummy": false
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0.08,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0.94,
+          "1": 0.06,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        },
+        "confidence": 0.93
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "ALLOW": 0.92,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.01,
+          "WATCHLIST_REITERATE": 0.07
+        },
+        "confidence": 0.89
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": "3 prior txs in memory; cum. outflow: $3,283.00"
+  },
+  {
+    "seq": 19,
+    "tx_time": "13:45:00",
+    "tenant_id": "tenant_clean_05",
+    "tenant_type": "CLEAN",
+    "amount": 220.0,
+    "balance": 47209.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.01,
+    "verdict": "ALLOW",
+    "latency_ms": 518.9721009992354,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 220.0,
+        "account_balance": 47209.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T13:45:00",
+        "hour": 13,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "verified_vendor_684",
+          "account_age_days": 471,
+          "is_dummy": false
+        },
+        "memo": "Vendor settlement invoice #43604"
+      },
+      "tenant_scrutiny_state": "CLEAN"
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0.01,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 1,
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        },
+        "confidence": 1
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "WATCHLIST_REITERATE": 0,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0,
+          "ALLOW": 1
+        },
+        "confidence": 1
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": ""
+  },
+  {
+    "seq": 20,
+    "tx_time": "13:55:00",
+    "tenant_id": "tenant_clean_04",
+    "tenant_type": "CLEAN",
+    "amount": 550.0,
+    "balance": 79732.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.03,
+    "verdict": "ALLOW",
+    "latency_ms": 393.7677829999302,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 550.0,
+        "account_balance": 79732.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T13:55:00",
+        "hour": 13,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "verified_vendor_316",
+          "account_age_days": 637,
+          "is_dummy": false
+        },
+        "memo": "Vendor settlement invoice #70819"
+      },
+      "tenant_scrutiny_state": "CLEAN",
+      "sliding_window_n_minus_3": {
+        "window_size": 3,
+        "cumulative_outflow": 694.0,
+        "history_sequence": [
+          {
+            "t_minus": "13:05:00",
+            "amt": 91.0,
+            "bal": 79876.0,
+            "to_dummy": false
+          },
+          {
+            "t_minus": "13:30:00",
+            "amt": 53.0,
+            "bal": 79785.0,
+            "to_dummy": false
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0.03,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0.98,
+          "1": 0.02,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        },
+        "confidence": 0.98
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "WATCHLIST_REITERATE": 0.06,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.02,
+          "ALLOW": 0.92
+        },
+        "confidence": 0.88
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": "2 prior txs in memory; cum. outflow: $694.00"
+  },
+  {
+    "seq": 21,
+    "tx_time": "14:10:00",
+    "tenant_id": "tenant_clean_05",
+    "tenant_type": "CLEAN",
+    "amount": 1108.0,
+    "balance": 46989.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.06,
+    "verdict": "ALLOW",
+    "latency_ms": 385.16468700254336,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 1108.0,
+        "account_balance": 46989.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T14:10:00",
+        "hour": 14,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "verified_vendor_912",
+          "account_age_days": 763,
+          "is_dummy": false
+        },
+        "memo": "Vendor settlement invoice #81784"
+      },
+      "tenant_scrutiny_state": "CLEAN",
+      "sliding_window_n_minus_3": {
+        "window_size": 2,
+        "cumulative_outflow": 1328.0,
+        "history_sequence": [
+          {
+            "t_minus": "13:45:00",
+            "amt": 220.0,
+            "bal": 47209.0,
+            "to_dummy": false
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0.06,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0.95,
+          "1": 0.05,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        },
+        "confidence": 0.95
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.03,
+          "WATCHLIST_REITERATE": 0.09,
+          "ALLOW": 0.88
+        },
+        "confidence": 0.83
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": "1 prior txs in memory; cum. outflow: $1,328.00"
+  },
+  {
+    "seq": 22,
+    "tx_time": "14:20:00",
+    "tenant_id": "tenant_clean_04",
+    "tenant_type": "CLEAN",
+    "amount": 932.0,
+    "balance": 79182.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.06,
+    "verdict": "ALLOW",
+    "latency_ms": 357.0934470008069,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 932.0,
+        "account_balance": 79182.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T14:20:00",
+        "hour": 14,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "verified_vendor_688",
+          "account_age_days": 373,
+          "is_dummy": false
+        },
+        "memo": "Vendor settlement invoice #43058"
+      },
+      "tenant_scrutiny_state": "CLEAN",
+      "sliding_window_n_minus_3": {
+        "window_size": 4,
+        "cumulative_outflow": 1626.0,
+        "history_sequence": [
+          {
+            "t_minus": "13:05:00",
+            "amt": 91.0,
+            "bal": 79876.0,
+            "to_dummy": false
+          },
+          {
+            "t_minus": "13:30:00",
+            "amt": 53.0,
+            "bal": 79785.0,
+            "to_dummy": false
+          },
+          {
+            "t_minus": "13:55:00",
+            "amt": 550.0,
+            "bal": 79732.0,
+            "to_dummy": false
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0.06,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0.96,
+          "1": 0.04,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        },
+        "confidence": 0.95
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "WATCHLIST_REITERATE": 0.05,
+          "ALLOW": 0.94,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.01
+        },
+        "confidence": 0.92
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": "3 prior txs in memory; cum. outflow: $1,626.00"
+  },
+  {
+    "seq": 23,
+    "tx_time": "14:25:00",
+    "tenant_id": "tenant_clean_06",
+    "tenant_type": "CLEAN",
+    "amount": 477.0,
+    "balance": 68831.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.01,
+    "verdict": "ALLOW",
+    "latency_ms": 527.5164710001263,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 477.0,
+        "account_balance": 68831.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T14:25:00",
+        "hour": 14,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "verified_vendor_131",
+          "account_age_days": 658,
+          "is_dummy": false
+        },
+        "memo": "Vendor settlement invoice #68371"
+      },
+      "tenant_scrutiny_state": "CLEAN"
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0.01,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 1,
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        },
+        "confidence": 1
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "ALLOW": 1,
+          "WATCHLIST_REITERATE": 0,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0
+        },
+        "confidence": 1
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": ""
+  },
+  {
+    "seq": 24,
+    "tx_time": "14:35:00",
+    "tenant_id": "tenant_clean_05",
+    "tenant_type": "CLEAN",
+    "amount": 1174.0,
+    "balance": 45881.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.08,
+    "verdict": "ALLOW",
+    "latency_ms": 578.4368459972029,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 1174.0,
+        "account_balance": 45881.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T14:35:00",
+        "hour": 14,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "verified_vendor_902",
+          "account_age_days": 483,
+          "is_dummy": false
+        },
+        "memo": "Vendor settlement invoice #37800"
+      },
+      "tenant_scrutiny_state": "CLEAN",
+      "sliding_window_n_minus_3": {
+        "window_size": 3,
+        "cumulative_outflow": 2502.0,
+        "history_sequence": [
+          {
+            "t_minus": "13:45:00",
+            "amt": 220.0,
+            "bal": 47209.0,
+            "to_dummy": false
+          },
+          {
+            "t_minus": "14:10:00",
+            "amt": 1108.0,
+            "bal": 46989.0,
+            "to_dummy": false
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0.08,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0.9400000000000001,
+          "1": 0.06,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        },
+        "confidence": 0.93
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "WATCHLIST_REITERATE": 0.12,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.03,
+          "ALLOW": 0.85
+        },
+        "confidence": 0.77
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": "2 prior txs in memory; cum. outflow: $2,502.00"
+  },
+  {
+    "seq": 25,
+    "tx_time": "14:50:00",
+    "tenant_id": "tenant_clean_06",
+    "tenant_type": "CLEAN",
+    "amount": 1042.0,
+    "balance": 68354.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.12,
+    "verdict": "ALLOW",
+    "latency_ms": 387.88283899702947,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 1042.0,
+        "account_balance": 68354.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T14:50:00",
+        "hour": 14,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "verified_vendor_288",
+          "account_age_days": 325,
+          "is_dummy": false
+        },
+        "memo": "Vendor settlement invoice #48057"
+      },
+      "tenant_scrutiny_state": "CLEAN",
+      "sliding_window_n_minus_3": {
+        "window_size": 2,
+        "cumulative_outflow": 1519.0,
+        "history_sequence": [
+          {
+            "t_minus": "14:25:00",
+            "amt": 477.0,
+            "bal": 68831.0,
+            "to_dummy": false
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0.12,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0.9,
+          "1": 0.09,
+          "2": 0.01,
+          "3": 0,
+          "4": 0
+        },
+        "confidence": 0.9
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "WATCHLIST_REITERATE": 0.14,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.03,
+          "ALLOW": 0.83
+        },
+        "confidence": 0.74
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": "1 prior txs in memory; cum. outflow: $1,519.00"
+  },
+  {
+    "seq": 26,
+    "tx_time": "15:00:00",
+    "tenant_id": "tenant_clean_05",
+    "tenant_type": "CLEAN",
+    "amount": 733.0,
+    "balance": 44707.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.07,
+    "verdict": "ALLOW",
+    "latency_ms": 361.22946699833847,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 733.0,
+        "account_balance": 44707.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T15:00:00",
+        "hour": 15,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "verified_vendor_852",
+          "account_age_days": 463,
+          "is_dummy": false
+        },
+        "memo": "Vendor settlement invoice #16586"
+      },
+      "tenant_scrutiny_state": "CLEAN",
+      "sliding_window_n_minus_3": {
+        "window_size": 4,
+        "cumulative_outflow": 3235.0,
+        "history_sequence": [
+          {
+            "t_minus": "13:45:00",
+            "amt": 220.0,
+            "bal": 47209.0,
+            "to_dummy": false
+          },
+          {
+            "t_minus": "14:10:00",
+            "amt": 1108.0,
+            "bal": 46989.0,
+            "to_dummy": false
+          },
+          {
+            "t_minus": "14:35:00",
+            "amt": 1174.0,
+            "bal": 45881.0,
+            "to_dummy": false
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0.07,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0.95,
+          "1": 0.05,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        },
+        "confidence": 0.94
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "WATCHLIST_REITERATE": 0.05,
+          "ALLOW": 0.94,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.01
+        },
+        "confidence": 0.91
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": "3 prior txs in memory; cum. outflow: $3,235.00"
+  },
+  {
+    "seq": 27,
+    "tx_time": "15:05:00",
+    "tenant_id": "tenant_clean_07",
+    "tenant_type": "CLEAN",
+    "amount": 825.0,
+    "balance": 31881.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.0,
+    "verdict": "ALLOW",
+    "latency_ms": 424.81113300164,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 825.0,
+        "account_balance": 31881.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T15:05:00",
+        "hour": 15,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "verified_vendor_264",
+          "account_age_days": 696,
+          "is_dummy": false
+        },
+        "memo": "Vendor settlement invoice #14480"
+      },
+      "tenant_scrutiny_state": "CLEAN"
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 1,
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        },
+        "confidence": 1
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "WATCHLIST_REITERATE": 0,
+          "ALLOW": 1,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0
+        },
+        "confidence": 1
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": ""
+  },
+  {
+    "seq": 28,
+    "tx_time": "15:15:00",
+    "tenant_id": "tenant_clean_06",
+    "tenant_type": "CLEAN",
+    "amount": 662.0,
+    "balance": 67312.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.06,
+    "verdict": "ALLOW",
+    "latency_ms": 432.58201999924495,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 662.0,
+        "account_balance": 67312.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T15:15:00",
+        "hour": 15,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "verified_vendor_856",
+          "account_age_days": 569,
+          "is_dummy": false
+        },
+        "memo": "Vendor settlement invoice #28833"
+      },
+      "tenant_scrutiny_state": "CLEAN",
+      "sliding_window_n_minus_3": {
+        "window_size": 3,
+        "cumulative_outflow": 2181.0,
+        "history_sequence": [
+          {
+            "t_minus": "14:25:00",
+            "amt": 477.0,
+            "bal": 68831.0,
+            "to_dummy": false
+          },
+          {
+            "t_minus": "14:50:00",
+            "amt": 1042.0,
+            "bal": 68354.0,
+            "to_dummy": false
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0.06,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0.95,
+          "1": 0.05,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        },
+        "confidence": 0.95
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "ALLOW": 0.92,
+          "WATCHLIST_REITERATE": 0.07,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.01
+        },
+        "confidence": 0.88
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": "2 prior txs in memory; cum. outflow: $2,181.00"
+  },
+  {
+    "seq": 29,
+    "tx_time": "15:30:00",
+    "tenant_id": "tenant_clean_07",
+    "tenant_type": "CLEAN",
+    "amount": 697.0,
+    "balance": 31056.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.09,
+    "verdict": "ALLOW",
+    "latency_ms": 1395.428752002772,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 697.0,
+        "account_balance": 31056.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T15:30:00",
+        "hour": 15,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "verified_vendor_439",
+          "account_age_days": 392,
+          "is_dummy": false
+        },
+        "memo": "Vendor settlement invoice #69570"
+      },
+      "tenant_scrutiny_state": "CLEAN",
+      "sliding_window_n_minus_3": {
+        "window_size": 2,
+        "cumulative_outflow": 1522.0,
+        "history_sequence": [
+          {
+            "t_minus": "15:05:00",
+            "amt": 825.0,
+            "bal": 31881.0,
+            "to_dummy": false
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0.09,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0.92,
+          "1": 0.07,
+          "2": 0.01,
+          "3": 0,
+          "4": 0
+        },
+        "confidence": 0.92
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "ALLOW": 0.86,
+          "WATCHLIST_REITERATE": 0.11,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.03
+        },
+        "confidence": 0.8
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": "1 prior txs in memory; cum. outflow: $1,522.00"
+  },
+  {
+    "seq": 30,
+    "tx_time": "15:40:00",
+    "tenant_id": "tenant_clean_06",
+    "tenant_type": "CLEAN",
+    "amount": 242.0,
+    "balance": 66650.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.09,
+    "verdict": "ALLOW",
+    "latency_ms": 400.7466460025171,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 242.0,
+        "account_balance": 66650.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T15:40:00",
+        "hour": 15,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "verified_vendor_216",
+          "account_age_days": 345,
+          "is_dummy": false
+        },
+        "memo": "Vendor settlement invoice #13705"
+      },
+      "tenant_scrutiny_state": "CLEAN",
+      "sliding_window_n_minus_3": {
+        "window_size": 4,
+        "cumulative_outflow": 2423.0,
+        "history_sequence": [
+          {
+            "t_minus": "14:25:00",
+            "amt": 477.0,
+            "bal": 68831.0,
+            "to_dummy": false
+          },
+          {
+            "t_minus": "14:50:00",
+            "amt": 1042.0,
+            "bal": 68354.0,
+            "to_dummy": false
+          },
+          {
+            "t_minus": "15:15:00",
+            "amt": 662.0,
+            "bal": 67312.0,
+            "to_dummy": false
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0.09,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0.93,
+          "1": 0.06,
+          "2": 0,
+          "3": 0.01,
+          "4": 0
+        },
+        "confidence": 0.92
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "ALLOW": 0.94,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.01,
+          "WATCHLIST_REITERATE": 0.05
+        },
+        "confidence": 0.91
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": "3 prior txs in memory; cum. outflow: $2,423.00"
+  },
+  {
+    "seq": 31,
+    "tx_time": "15:45:00",
+    "tenant_id": "tenant_clean_08",
+    "tenant_type": "CLEAN",
+    "amount": 427.0,
+    "balance": 50221.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.01,
+    "verdict": "ALLOW",
+    "latency_ms": 413.41863900015596,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 427.0,
+        "account_balance": 50221.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T15:45:00",
+        "hour": 15,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "verified_vendor_690",
+          "account_age_days": 301,
+          "is_dummy": false
+        },
+        "memo": "Vendor settlement invoice #88656"
+      },
+      "tenant_scrutiny_state": "CLEAN"
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0.01,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 1,
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        },
+        "confidence": 0.99
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "WATCHLIST_REITERATE": 0,
+          "ALLOW": 1,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0
+        },
+        "confidence": 1
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": ""
+  },
+  {
+    "seq": 32,
+    "tx_time": "15:55:00",
+    "tenant_id": "tenant_clean_07",
+    "tenant_type": "CLEAN",
+    "amount": 159.0,
+    "balance": 30359.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.05,
+    "verdict": "ALLOW",
+    "latency_ms": 372.0200099996873,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 159.0,
+        "account_balance": 30359.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T15:55:00",
+        "hour": 15,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "verified_vendor_360",
+          "account_age_days": 590,
+          "is_dummy": false
+        },
+        "memo": "Vendor settlement invoice #43914"
+      },
+      "tenant_scrutiny_state": "CLEAN",
+      "sliding_window_n_minus_3": {
+        "window_size": 3,
+        "cumulative_outflow": 1681.0,
+        "history_sequence": [
+          {
+            "t_minus": "15:05:00",
+            "amt": 825.0,
+            "bal": 31881.0,
+            "to_dummy": false
+          },
+          {
+            "t_minus": "15:30:00",
+            "amt": 697.0,
+            "bal": 31056.0,
+            "to_dummy": false
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0.05,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0.97,
+          "1": 0.03,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        },
+        "confidence": 0.96
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "ALLOW": 0.93,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.01,
+          "WATCHLIST_REITERATE": 0.05
+        },
+        "confidence": 0.9
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": "2 prior txs in memory; cum. outflow: $1,681.00"
+  },
+  {
+    "seq": 33,
+    "tx_time": "16:10:00",
+    "tenant_id": "tenant_clean_08",
+    "tenant_type": "CLEAN",
+    "amount": 241.0,
+    "balance": 49794.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.11,
+    "verdict": "ALLOW",
+    "latency_ms": 388.1689690024359,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 241.0,
+        "account_balance": 49794.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T16:10:00",
+        "hour": 16,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "verified_vendor_181",
+          "account_age_days": 648,
+          "is_dummy": false
+        },
+        "memo": "Vendor settlement invoice #49089"
+      },
+      "tenant_scrutiny_state": "CLEAN",
+      "sliding_window_n_minus_3": {
+        "window_size": 2,
+        "cumulative_outflow": 668.0,
+        "history_sequence": [
+          {
+            "t_minus": "15:45:00",
+            "amt": 427.0,
+            "bal": 50221.0,
+            "to_dummy": false
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0.11,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0.9,
+          "1": 0.09,
+          "2": 0.01,
+          "3": 0,
+          "4": 0
+        },
+        "confidence": 0.9
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "WATCHLIST_REITERATE": 0.13,
+          "ALLOW": 0.84,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.03
+        },
+        "confidence": 0.75
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": "1 prior txs in memory; cum. outflow: $668.00"
+  },
+  {
+    "seq": 34,
+    "tx_time": "16:20:00",
+    "tenant_id": "tenant_clean_07",
+    "tenant_type": "CLEAN",
+    "amount": 706.0,
+    "balance": 30200.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.18,
+    "verdict": "ALLOW",
+    "latency_ms": 378.3782680002332,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 706.0,
+        "account_balance": 30200.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T16:20:00",
+        "hour": 16,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "verified_vendor_319",
+          "account_age_days": 230,
+          "is_dummy": false
+        },
+        "memo": "Vendor settlement invoice #90490"
+      },
+      "tenant_scrutiny_state": "CLEAN",
+      "sliding_window_n_minus_3": {
+        "window_size": 4,
+        "cumulative_outflow": 2387.0,
+        "history_sequence": [
+          {
+            "t_minus": "15:05:00",
+            "amt": 825.0,
+            "bal": 31881.0,
+            "to_dummy": false
+          },
+          {
+            "t_minus": "15:30:00",
+            "amt": 697.0,
+            "bal": 31056.0,
+            "to_dummy": false
+          },
+          {
+            "t_minus": "15:55:00",
+            "amt": 159.0,
+            "bal": 30359.0,
+            "to_dummy": false
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0.18,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0.87,
+          "1": 0.11,
+          "2": 0.01,
+          "3": 0.01,
+          "4": 0
+        },
+        "confidence": 0.85
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "WATCHLIST_REITERATE": 0.08,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.01,
+          "ALLOW": 0.91
+        },
+        "confidence": 0.87
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": "3 prior txs in memory; cum. outflow: $2,387.00"
+  },
+  {
+    "seq": 35,
+    "tx_time": "16:35:00",
+    "tenant_id": "tenant_clean_08",
+    "tenant_type": "CLEAN",
+    "amount": 440.0,
+    "balance": 49553.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.11,
+    "verdict": "ALLOW",
+    "latency_ms": 458.36649799821316,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 440.0,
+        "account_balance": 49553.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T16:35:00",
+        "hour": 16,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "verified_vendor_499",
+          "account_age_days": 431,
+          "is_dummy": false
+        },
+        "memo": "Vendor settlement invoice #43920"
+      },
+      "tenant_scrutiny_state": "CLEAN",
+      "sliding_window_n_minus_3": {
+        "window_size": 3,
+        "cumulative_outflow": 1108.0,
+        "history_sequence": [
+          {
+            "t_minus": "15:45:00",
+            "amt": 427.0,
+            "bal": 50221.0,
+            "to_dummy": false
+          },
+          {
+            "t_minus": "16:10:00",
+            "amt": 241.0,
+            "bal": 49794.0,
+            "to_dummy": false
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0.11,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0.91,
+          "1": 0.08,
+          "2": 0,
+          "3": 0.01,
+          "4": 0
+        },
+        "confidence": 0.91
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "WATCHLIST_REITERATE": 0.09,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.02,
+          "ALLOW": 0.89
+        },
+        "confidence": 0.84
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": "2 prior txs in memory; cum. outflow: $1,108.00"
+  },
+  {
+    "seq": 36,
+    "tx_time": "17:00:00",
+    "tenant_id": "tenant_clean_08",
+    "tenant_type": "CLEAN",
+    "amount": 415.0,
+    "balance": 49113.0,
+    "solvency_prob": 0.02,
+    "sybil_drain_score": 0.07,
+    "verdict": "ALLOW",
+    "latency_ms": 714.311423998879,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 415.0,
+        "account_balance": 49113.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-19T17:00:00",
+        "hour": 17,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "verified_vendor_799",
+          "account_age_days": 238,
+          "is_dummy": false
+        },
+        "memo": "Vendor settlement invoice #69217"
+      },
+      "tenant_scrutiny_state": "CLEAN",
+      "sliding_window_n_minus_3": {
+        "window_size": 4,
+        "cumulative_outflow": 1523.0,
+        "history_sequence": [
+          {
+            "t_minus": "15:45:00",
+            "amt": 427.0,
+            "bal": 50221.0,
+            "to_dummy": false
+          },
+          {
+            "t_minus": "16:10:00",
+            "amt": 241.0,
+            "bal": 49794.0,
+            "to_dummy": false
+          },
+          {
+            "t_minus": "16:35:00",
+            "amt": 440.0,
+            "bal": 49553.0,
+            "to_dummy": false
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 0.07,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0.95,
+          "1": 0.05,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        },
+        "confidence": 0.94
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "ALLOW",
+        "probabilities": {
+          "WATCHLIST_REITERATE": 0.04,
+          "ALLOW": 0.96,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0
+        },
+        "confidence": 0.94
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> CLEAN",
+    "history_summary": "3 prior txs in memory; cum. outflow: $1,523.00"
+  },
+  {
+    "seq": 37,
+    "tx_time": "09-20 02:00",
+    "tenant_id": "tenant_slow_hack",
+    "tenant_type": "SLOW_HACK",
+    "amount": 2500.0,
+    "balance": 3620.0,
+    "solvency_prob": 0.03,
+    "sybil_drain_score": 3.88,
+    "verdict": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+    "latency_ms": 511.2141489989881,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 2500.0,
+        "account_balance": 3620.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-20T02:00:00",
+        "hour": 2,
+        "is_off_hours": true,
+        "recipient": {
+          "id": "burner_sybil_0x335b",
+          "account_age_days": 0.02,
+          "is_dummy": true
+        },
+        "memo": "liquidity_node_shift_alpha"
+      },
+      "tenant_scrutiny_state": "LOCKED",
+      "sliding_window_n_minus_3": {
+        "window_size": 4,
+        "cumulative_outflow": 3855.0,
+        "history_sequence": [
+          {
+            "t_minus": "09-18 19:30",
+            "amt": 120.0,
+            "bal": 4975.0,
+            "to_dummy": false
+          },
+          {
+            "t_minus": "09-19 01:15",
+            "amt": 1200.0,
+            "bal": 4855.0,
+            "to_dummy": true
+          },
+          {
+            "t_minus": "09-19 08:30",
+            "amt": 35.0,
+            "bal": 3655.0,
+            "to_dummy": false
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.03
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 3.88,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0,
+          "1": 0,
+          "2": 0,
+          "3": 0.11,
+          "4": 0.89
+        },
+        "confidence": 0.9
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+        "probabilities": {
+          "WATCHLIST_REITERATE": 0.04,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.96,
+          "ALLOW": 0
+        },
+        "confidence": 0.94
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> LOCKED",
+    "history_summary": "3 prior txs in memory; cum. outflow: $3,855.00"
+  },
+  {
+    "seq": 38,
+    "tx_time": "03:14:13",
+    "tenant_id": "tenant_fast_hack",
+    "tenant_type": "FAST_HACK",
+    "amount": 1000000.0,
+    "balance": 0.0,
+    "solvency_prob": 0.99,
+    "sybil_drain_score": 3.98,
+    "verdict": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+    "latency_ms": 510.3835620029713,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 1000000.0,
+        "account_balance": 0.0,
+        "is_balance_sufficient": false,
+        "timestamp": "2026-09-20T03:14:13.500000",
+        "hour": 3,
+        "is_off_hours": true,
+        "recipient": {
+          "id": "burner_dummy_wallet_0x4e7a6",
+          "account_age_days": 0.01,
+          "is_dummy": true
+        },
+        "memo": "burst_drain_batch_chunk_1"
+      },
+      "tenant_scrutiny_state": "CLEAN"
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.99
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 3.98,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0,
+          "1": 0,
+          "2": 0,
+          "3": 0.01,
+          "4": 0.99
+        },
+        "confidence": 0.99
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+        "probabilities": {
+          "WATCHLIST_REITERATE": 0.04,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.96,
+          "ALLOW": 0
+        },
+        "confidence": 0.94
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> LOCKED",
+    "history_summary": ""
+  },
+  {
+    "seq": 39,
+    "tx_time": "03:14:17",
+    "tenant_id": "tenant_fast_hack",
+    "tenant_type": "FAST_HACK",
+    "amount": 1000000.0,
+    "balance": 0.0,
+    "solvency_prob": 1.0,
+    "sybil_drain_score": 4.0,
+    "verdict": "DROPPED_ALREADY_LOCKED",
+    "latency_ms": 0.0,
+    "flag_reason": "Account already suspended by circuit breaker. Execution halted."
+  },
+  {
+    "seq": 40,
+    "tx_time": "03:14:20",
+    "tenant_id": "tenant_fast_hack",
+    "tenant_type": "FAST_HACK",
+    "amount": 1000000.0,
+    "balance": 0.0,
+    "solvency_prob": 1.0,
+    "sybil_drain_score": 4.0,
+    "verdict": "DROPPED_ALREADY_LOCKED",
+    "latency_ms": 0.0,
+    "flag_reason": "Account already suspended by circuit breaker. Execution halted."
+  },
+  {
+    "seq": 41,
+    "tx_time": "03:14:24",
+    "tenant_id": "tenant_fast_hack",
+    "tenant_type": "FAST_HACK",
+    "amount": 1000000.0,
+    "balance": 0.0,
+    "solvency_prob": 1.0,
+    "sybil_drain_score": 4.0,
+    "verdict": "DROPPED_ALREADY_LOCKED",
+    "latency_ms": 0.0,
+    "flag_reason": "Account already suspended by circuit breaker. Execution halted."
+  },
+  {
+    "seq": 42,
+    "tx_time": "03:14:27",
+    "tenant_id": "tenant_fast_hack",
+    "tenant_type": "FAST_HACK",
+    "amount": 1000000.0,
+    "balance": 0.0,
+    "solvency_prob": 1.0,
+    "sybil_drain_score": 4.0,
+    "verdict": "DROPPED_ALREADY_LOCKED",
+    "latency_ms": 0.0,
+    "flag_reason": "Account already suspended by circuit breaker. Execution halted."
+  },
+  {
+    "seq": 43,
+    "tx_time": "03:14:31",
+    "tenant_id": "tenant_fast_hack",
+    "tenant_type": "FAST_HACK",
+    "amount": 1000000.0,
+    "balance": 0.0,
+    "solvency_prob": 1.0,
+    "sybil_drain_score": 4.0,
+    "verdict": "DROPPED_ALREADY_LOCKED",
+    "latency_ms": 0.0,
+    "flag_reason": "Account already suspended by circuit breaker. Execution halted."
+  },
+  {
+    "seq": 44,
+    "tx_time": "09-20 11:15",
+    "tenant_id": "tenant_slow_hack",
+    "tenant_type": "SLOW_HACK",
+    "amount": 55.0,
+    "balance": 1120.0,
+    "solvency_prob": 0.03,
+    "sybil_drain_score": 3.56,
+    "verdict": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+    "latency_ms": 511.8098569982976,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 55.0,
+        "account_balance": 1120.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-20T11:15:00",
+        "hour": 11,
+        "is_off_hours": false,
+        "recipient": {
+          "id": "known_verified_vendor",
+          "account_age_days": 350,
+          "is_dummy": false
+        },
+        "memo": "office_courier_delivery"
+      },
+      "tenant_scrutiny_state": "LOCKED",
+      "sliding_window_n_minus_3": {
+        "window_size": 4,
+        "cumulative_outflow": 3790.0,
+        "history_sequence": [
+          {
+            "t_minus": "09-19 01:15",
+            "amt": 1200.0,
+            "bal": 4855.0,
+            "to_dummy": true
+          },
+          {
+            "t_minus": "09-19 08:30",
+            "amt": 35.0,
+            "bal": 3655.0,
+            "to_dummy": false
+          },
+          {
+            "t_minus": "09-20 02:00",
+            "amt": 2500.0,
+            "bal": 3620.0,
+            "to_dummy": true
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.03
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 3.56,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0.04,
+          "1": 0.02,
+          "2": 0.02,
+          "3": 0.18,
+          "4": 0.74
+        },
+        "confidence": 0.63
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+        "probabilities": {
+          "WATCHLIST_REITERATE": 0.16,
+          "ALLOW": 0.04,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.8
+        },
+        "confidence": 0.71
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> LOCKED",
+    "history_summary": "3 prior txs in memory; cum. outflow: $3,790.00"
+  },
+  {
+    "seq": 45,
+    "tx_time": "09-21 02:45",
+    "tenant_id": "tenant_slow_hack",
+    "tenant_type": "SLOW_HACK",
+    "amount": 980.0,
+    "balance": 1065.0,
+    "solvency_prob": 0.03,
+    "sybil_drain_score": 3.93,
+    "verdict": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+    "latency_ms": 438.2723149974481,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 980.0,
+        "account_balance": 1065.0,
+        "is_balance_sufficient": true,
+        "timestamp": "2026-09-21T02:45:00",
+        "hour": 2,
+        "is_off_hours": true,
+        "recipient": {
+          "id": "burner_sybil_0xfaff",
+          "account_age_days": 0.02,
+          "is_dummy": true
+        },
+        "memo": "fast_bridge_sweep_01"
+      },
+      "tenant_scrutiny_state": "LOCKED",
+      "sliding_window_n_minus_3": {
+        "window_size": 4,
+        "cumulative_outflow": 3570.0,
+        "history_sequence": [
+          {
+            "t_minus": "09-19 08:30",
+            "amt": 35.0,
+            "bal": 3655.0,
+            "to_dummy": false
+          },
+          {
+            "t_minus": "09-20 02:00",
+            "amt": 2500.0,
+            "bal": 3620.0,
+            "to_dummy": true
+          },
+          {
+            "t_minus": "09-20 11:15",
+            "amt": 55.0,
+            "bal": 1120.0,
+            "to_dummy": false
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.03
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 3.93,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0,
+          "1": 0,
+          "2": 0,
+          "3": 0.06,
+          "4": 0.94
+        },
+        "confidence": 0.94
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+        "probabilities": {
+          "WATCHLIST_REITERATE": 0.03,
+          "ALLOW": 0,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.97
+        },
+        "confidence": 0.96
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> LOCKED",
+    "history_summary": "3 prior txs in memory; cum. outflow: $3,570.00"
+  },
+  {
+    "seq": 46,
+    "tx_time": "09-21 03:15",
+    "tenant_id": "tenant_slow_hack",
+    "tenant_type": "SLOW_HACK",
+    "amount": 5000.0,
+    "balance": 85.0,
+    "solvency_prob": 0.99,
+    "sybil_drain_score": 3.98,
+    "verdict": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+    "latency_ms": 390.35938199958764,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 5000.0,
+        "account_balance": 85.0,
+        "is_balance_sufficient": false,
+        "timestamp": "2026-09-21T03:15:00",
+        "hour": 3,
+        "is_off_hours": true,
+        "recipient": {
+          "id": "burner_sybil_0x6f11",
+          "account_age_days": 0.02,
+          "is_dummy": true
+        },
+        "memo": "fast_bridge_sweep_02"
+      },
+      "tenant_scrutiny_state": "LOCKED",
+      "sliding_window_n_minus_3": {
+        "window_size": 4,
+        "cumulative_outflow": 8535.0,
+        "history_sequence": [
+          {
+            "t_minus": "09-20 02:00",
+            "amt": 2500.0,
+            "bal": 3620.0,
+            "to_dummy": true
+          },
+          {
+            "t_minus": "09-20 11:15",
+            "amt": 55.0,
+            "bal": 1120.0,
+            "to_dummy": false
+          },
+          {
+            "t_minus": "09-21 02:45",
+            "amt": 980.0,
+            "bal": 1065.0,
+            "to_dummy": true
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.99
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 3.98,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0,
+          "1": 0,
+          "2": 0,
+          "3": 0.01,
+          "4": 0.99
+        },
+        "confidence": 0.99
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+        "probabilities": {
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 1,
+          "ALLOW": 0,
+          "WATCHLIST_REITERATE": 0
+        },
+        "confidence": 0.99
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> LOCKED",
+    "history_summary": "3 prior txs in memory; cum. outflow: $8,535.00"
+  },
+  {
+    "seq": 47,
+    "tx_time": "09-21 03:45",
+    "tenant_id": "tenant_slow_hack",
+    "tenant_type": "SLOW_HACK",
+    "amount": 250000.0,
+    "balance": 0.0,
+    "solvency_prob": 0.99,
+    "sybil_drain_score": 3.98,
+    "verdict": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+    "latency_ms": 498.0865420002374,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 250000.0,
+        "account_balance": 0.0,
+        "is_balance_sufficient": false,
+        "timestamp": "2026-09-21T03:45:00",
+        "hour": 3,
+        "is_off_hours": true,
+        "recipient": {
+          "id": "burner_sybil_0x34ea",
+          "account_age_days": 0.02,
+          "is_dummy": true
+        },
+        "memo": "treasury_unpegged_drain"
+      },
+      "tenant_scrutiny_state": "LOCKED",
+      "sliding_window_n_minus_3": {
+        "window_size": 4,
+        "cumulative_outflow": 256035.0,
+        "history_sequence": [
+          {
+            "t_minus": "09-20 11:15",
+            "amt": 55.0,
+            "bal": 1120.0,
+            "to_dummy": false
+          },
+          {
+            "t_minus": "09-21 02:45",
+            "amt": 980.0,
+            "bal": 1065.0,
+            "to_dummy": true
+          },
+          {
+            "t_minus": "09-21 03:15",
+            "amt": 5000.0,
+            "bal": 85.0,
+            "to_dummy": true
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.99
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 3.98,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0,
+          "1": 0,
+          "2": 0,
+          "3": 0.01,
+          "4": 0.99
+        },
+        "confidence": 0.98
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+        "probabilities": {
+          "WATCHLIST_REITERATE": 0,
+          "ALLOW": 0,
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 1
+        },
+        "confidence": 1
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> LOCKED",
+    "history_summary": "3 prior txs in memory; cum. outflow: $256,035.00"
+  },
+  {
+    "seq": 48,
+    "tx_time": "09-21 04:15",
+    "tenant_id": "tenant_slow_hack",
+    "tenant_type": "SLOW_HACK",
+    "amount": 1000000.0,
+    "balance": 0.0,
+    "solvency_prob": 0.99,
+    "sybil_drain_score": 3.98,
+    "verdict": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+    "latency_ms": 510.8116129995324,
+    "prompt_state": {
+      "current_tx": {
+        "amount": 1000000.0,
+        "account_balance": 0.0,
+        "is_balance_sufficient": false,
+        "timestamp": "2026-09-21T04:15:00",
+        "hour": 4,
+        "is_off_hours": true,
+        "recipient": {
+          "id": "burner_sybil_0xea80",
+          "account_age_days": 0.02,
+          "is_dummy": true
+        },
+        "memo": "final_settlement_outflow"
+      },
+      "tenant_scrutiny_state": "LOCKED",
+      "sliding_window_n_minus_3": {
+        "window_size": 4,
+        "cumulative_outflow": 1255980.0,
+        "history_sequence": [
+          {
+            "t_minus": "09-21 02:45",
+            "amt": 980.0,
+            "bal": 1065.0,
+            "to_dummy": true
+          },
+          {
+            "t_minus": "09-21 03:15",
+            "amt": 5000.0,
+            "bal": 85.0,
+            "to_dummy": true
+          },
+          {
+            "t_minus": "09-21 03:45",
+            "amt": 250000.0,
+            "bal": 0.0,
+            "to_dummy": true
+          }
+        ]
+      }
+    },
+    "raw_response": {
+      "solvency_breach": {
+        "type": "noul",
+        "noul": 0.99
+      },
+      "sybil_drain_risk": {
+        "type": "score",
+        "score": 3.98,
+        "legend": {
+          "0": "Score 0: Normal transaction, healthy balance, established counterparty.",
+          "1": "Score 1: Minor anomaly or low-risk variance.",
+          "2": "Score 2: Moderate risk (unusual hours or new recipient, but within credit limits).",
+          "3": "Score 3: High risk (suspicious repeated drain, nocturnal activity, or unverified recipient).",
+          "4": "Score 4: Critical attack pattern (zero balance bypass, nocturnal burst, or dummy mule siphoning)."
+        },
+        "probabilities": {
+          "0": 0,
+          "1": 0,
+          "2": 0,
+          "3": 0.01,
+          "4": 0.99
+        },
+        "confidence": 0.98
+      },
+      "circuit_breaker_verdict": {
+        "type": "choice",
+        "choice": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+        "probabilities": {
+          "TRIP_CIRCUIT_BREAKER_AND_LOCK": 1,
+          "WATCHLIST_REITERATE": 0,
+          "ALLOW": 0
+        },
+        "confidence": 1
+      }
+    },
+    "flag_reason": "Adaptive State updated to -> LOCKED",
+    "history_summary": "3 prior txs in memory; cum. outflow: $1,255,980.00"
+  }
+]

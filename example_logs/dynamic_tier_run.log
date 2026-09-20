@@ -1,0 +1,1373 @@
+=== JEV DYNAMIC TIER BENCHMARK RUN: 2026-09-20T00:58:02.441015 ===
+
+10:05:00   LEGIT_CORP       corp_tenant_alpha      $  1,282.00 TIER_1     0.01/4 🟢 ALLOW                        701.4ms    706 tok
+   [PROMPT STATE SENT]:
+   {
+       "inspection_tier": "TIER_1",
+       "current_tx": {
+           "amount": 1282.0,
+           "account_balance": 120000.0,
+           "is_balance_sufficient": true,
+           "timestamp": "2026-09-19T10:05:00",
+           "hour": 10,
+           "is_off_hours": false,
+           "recipient": {
+               "id": "vendor_corp_01",
+               "is_dummy": false,
+               "age_days": 400
+           },
+           "memo": "Invoice settlement tranche #1"
+       }
+   }
+   [JEV RAW RESPONSE]:
+   {
+       "solvency_breach": {
+           "type": "noul",
+           "noul": 0.03
+       },
+       "threat_confidence_score": {
+           "type": "score",
+           "score": 0.01,
+           "legend": {
+               "0": "Score 0: Legitimate expected business operations.",
+               "1": "Score 1: Minor anomaly, low risk.",
+               "2": "Score 2: Moderate suspicion (unusual hours or new counterparty, but ambiguous).",
+               "3": "Score 3: High suspicion (persistent off-hours drainage or unverified mule pattern).",
+               "4": "Score 4: Confirmed exploit / active treasury siphon."
+           },
+           "probabilities": {
+               "0": 1,
+               "1": 0,
+               "2": 0,
+               "3": 0,
+               "4": 0
+           },
+           "confidence": 0.99
+       },
+       "circuit_breaker_verdict": {
+           "type": "choice",
+           "choice": "ALLOW",
+           "probabilities": {
+               "ALLOW": 0.97,
+               "ELEVATE_TO_DEEP_INSPECTION": 0.03,
+               "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0
+           },
+           "confidence": 0.96
+       }
+   }
+-------------------------------------------------------------------------------------------------------------------
+10:40:00   LEGIT_CORP       corp_tenant_alpha      $    600.00 TIER_1     0.01/4 🟢 ALLOW                        524.6ms    705 tok
+   [PROMPT STATE SENT]:
+   {
+       "inspection_tier": "TIER_1",
+       "current_tx": {
+           "amount": 600.0,
+           "account_balance": 118718.0,
+           "is_balance_sufficient": true,
+           "timestamp": "2026-09-19T10:40:00",
+           "hour": 10,
+           "is_off_hours": false,
+           "recipient": {
+               "id": "vendor_corp_02",
+               "is_dummy": false,
+               "age_days": 400
+           },
+           "memo": "Invoice settlement tranche #2"
+       }
+   }
+   [JEV RAW RESPONSE]:
+   {
+       "solvency_breach": {
+           "type": "noul",
+           "noul": 0.03
+       },
+       "threat_confidence_score": {
+           "type": "score",
+           "score": 0.01,
+           "legend": {
+               "0": "Score 0: Legitimate expected business operations.",
+               "1": "Score 1: Minor anomaly, low risk.",
+               "2": "Score 2: Moderate suspicion (unusual hours or new counterparty, but ambiguous).",
+               "3": "Score 3: High suspicion (persistent off-hours drainage or unverified mule pattern).",
+               "4": "Score 4: Confirmed exploit / active treasury siphon."
+           },
+           "probabilities": {
+               "0": 1,
+               "1": 0,
+               "2": 0,
+               "3": 0,
+               "4": 0
+           },
+           "confidence": 1
+       },
+       "circuit_breaker_verdict": {
+           "type": "choice",
+           "choice": "ALLOW",
+           "probabilities": {
+               "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0,
+               "ELEVATE_TO_DEEP_INSPECTION": 0.02,
+               "ALLOW": 0.98
+           },
+           "confidence": 0.97
+       }
+   }
+-------------------------------------------------------------------------------------------------------------------
+11:15:00   LEGIT_CORP       corp_tenant_alpha      $    567.00 TIER_1     0.01/4 🟢 ALLOW                        352.7ms    705 tok
+   [PROMPT STATE SENT]:
+   {
+       "inspection_tier": "TIER_1",
+       "current_tx": {
+           "amount": 567.0,
+           "account_balance": 118118.0,
+           "is_balance_sufficient": true,
+           "timestamp": "2026-09-19T11:15:00",
+           "hour": 11,
+           "is_off_hours": false,
+           "recipient": {
+               "id": "vendor_corp_03",
+               "is_dummy": false,
+               "age_days": 400
+           },
+           "memo": "Invoice settlement tranche #3"
+       }
+   }
+   [JEV RAW RESPONSE]:
+   {
+       "solvency_breach": {
+           "type": "noul",
+           "noul": 0.03
+       },
+       "threat_confidence_score": {
+           "type": "score",
+           "score": 0.01,
+           "legend": {
+               "0": "Score 0: Legitimate expected business operations.",
+               "1": "Score 1: Minor anomaly, low risk.",
+               "2": "Score 2: Moderate suspicion (unusual hours or new counterparty, but ambiguous).",
+               "3": "Score 3: High suspicion (persistent off-hours drainage or unverified mule pattern).",
+               "4": "Score 4: Confirmed exploit / active treasury siphon."
+           },
+           "probabilities": {
+               "0": 1,
+               "1": 0,
+               "2": 0,
+               "3": 0,
+               "4": 0
+           },
+           "confidence": 0.99
+       },
+       "circuit_breaker_verdict": {
+           "type": "choice",
+           "choice": "ALLOW",
+           "probabilities": {
+               "ALLOW": 0.97,
+               "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0,
+               "ELEVATE_TO_DEEP_INSPECTION": 0.03
+           },
+           "confidence": 0.96
+       }
+   }
+-------------------------------------------------------------------------------------------------------------------
+11:50:00   LEGIT_CORP       corp_tenant_alpha      $    387.00 TIER_1     0.01/4 🟢 ALLOW                        436.3ms    705 tok
+   [PROMPT STATE SENT]:
+   {
+       "inspection_tier": "TIER_1",
+       "current_tx": {
+           "amount": 387.0,
+           "account_balance": 117551.0,
+           "is_balance_sufficient": true,
+           "timestamp": "2026-09-19T11:50:00",
+           "hour": 11,
+           "is_off_hours": false,
+           "recipient": {
+               "id": "vendor_corp_04",
+               "is_dummy": false,
+               "age_days": 400
+           },
+           "memo": "Invoice settlement tranche #4"
+       }
+   }
+   [JEV RAW RESPONSE]:
+   {
+       "solvency_breach": {
+           "type": "noul",
+           "noul": 0.03
+       },
+       "threat_confidence_score": {
+           "type": "score",
+           "score": 0.01,
+           "legend": {
+               "0": "Score 0: Legitimate expected business operations.",
+               "1": "Score 1: Minor anomaly, low risk.",
+               "2": "Score 2: Moderate suspicion (unusual hours or new counterparty, but ambiguous).",
+               "3": "Score 3: High suspicion (persistent off-hours drainage or unverified mule pattern).",
+               "4": "Score 4: Confirmed exploit / active treasury siphon."
+           },
+           "probabilities": {
+               "0": 1,
+               "1": 0,
+               "2": 0,
+               "3": 0,
+               "4": 0
+           },
+           "confidence": 1
+       },
+       "circuit_breaker_verdict": {
+           "type": "choice",
+           "choice": "ALLOW",
+           "probabilities": {
+               "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0,
+               "ALLOW": 0.98,
+               "ELEVATE_TO_DEEP_INSPECTION": 0.02
+           },
+           "confidence": 0.97
+       }
+   }
+-------------------------------------------------------------------------------------------------------------------
+12:25:00   LEGIT_CORP       corp_tenant_alpha      $    505.00 TIER_1     0.01/4 🟢 ALLOW                        458.9ms    705 tok
+   [PROMPT STATE SENT]:
+   {
+       "inspection_tier": "TIER_1",
+       "current_tx": {
+           "amount": 505.0,
+           "account_balance": 117164.0,
+           "is_balance_sufficient": true,
+           "timestamp": "2026-09-19T12:25:00",
+           "hour": 12,
+           "is_off_hours": false,
+           "recipient": {
+               "id": "vendor_corp_05",
+               "is_dummy": false,
+               "age_days": 400
+           },
+           "memo": "Invoice settlement tranche #5"
+       }
+   }
+   [JEV RAW RESPONSE]:
+   {
+       "solvency_breach": {
+           "type": "noul",
+           "noul": 0.03
+       },
+       "threat_confidence_score": {
+           "type": "score",
+           "score": 0.01,
+           "legend": {
+               "0": "Score 0: Legitimate expected business operations.",
+               "1": "Score 1: Minor anomaly, low risk.",
+               "2": "Score 2: Moderate suspicion (unusual hours or new counterparty, but ambiguous).",
+               "3": "Score 3: High suspicion (persistent off-hours drainage or unverified mule pattern).",
+               "4": "Score 4: Confirmed exploit / active treasury siphon."
+           },
+           "probabilities": {
+               "0": 1,
+               "1": 0,
+               "2": 0,
+               "3": 0,
+               "4": 0
+           },
+           "confidence": 0.99
+       },
+       "circuit_breaker_verdict": {
+           "type": "choice",
+           "choice": "ALLOW",
+           "probabilities": {
+               "ELEVATE_TO_DEEP_INSPECTION": 0.02,
+               "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0,
+               "ALLOW": 0.98
+           },
+           "confidence": 0.97
+       }
+   }
+-------------------------------------------------------------------------------------------------------------------
+13:00:00   LEGIT_CORP       corp_tenant_alpha      $  1,262.00 TIER_1     0.01/4 🟢 ALLOW                        430.2ms    706 tok
+   [PROMPT STATE SENT]:
+   {
+       "inspection_tier": "TIER_1",
+       "current_tx": {
+           "amount": 1262.0,
+           "account_balance": 116659.0,
+           "is_balance_sufficient": true,
+           "timestamp": "2026-09-19T13:00:00",
+           "hour": 13,
+           "is_off_hours": false,
+           "recipient": {
+               "id": "vendor_corp_06",
+               "is_dummy": false,
+               "age_days": 400
+           },
+           "memo": "Invoice settlement tranche #6"
+       }
+   }
+   [JEV RAW RESPONSE]:
+   {
+       "solvency_breach": {
+           "type": "noul",
+           "noul": 0.03
+       },
+       "threat_confidence_score": {
+           "type": "score",
+           "score": 0.01,
+           "legend": {
+               "0": "Score 0: Legitimate expected business operations.",
+               "1": "Score 1: Minor anomaly, low risk.",
+               "2": "Score 2: Moderate suspicion (unusual hours or new counterparty, but ambiguous).",
+               "3": "Score 3: High suspicion (persistent off-hours drainage or unverified mule pattern).",
+               "4": "Score 4: Confirmed exploit / active treasury siphon."
+           },
+           "probabilities": {
+               "0": 1,
+               "1": 0,
+               "2": 0,
+               "3": 0,
+               "4": 0
+           },
+           "confidence": 0.99
+       },
+       "circuit_breaker_verdict": {
+           "type": "choice",
+           "choice": "ALLOW",
+           "probabilities": {
+               "ELEVATE_TO_DEEP_INSPECTION": 0.03,
+               "ALLOW": 0.97,
+               "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0
+           },
+           "confidence": 0.95
+       }
+   }
+-------------------------------------------------------------------------------------------------------------------
+13:35:00   LEGIT_CORP       corp_tenant_alpha      $  1,343.00 TIER_1     0.01/4 🟢 ALLOW                        412.2ms    706 tok
+   [PROMPT STATE SENT]:
+   {
+       "inspection_tier": "TIER_1",
+       "current_tx": {
+           "amount": 1343.0,
+           "account_balance": 115397.0,
+           "is_balance_sufficient": true,
+           "timestamp": "2026-09-19T13:35:00",
+           "hour": 13,
+           "is_off_hours": false,
+           "recipient": {
+               "id": "vendor_corp_07",
+               "is_dummy": false,
+               "age_days": 400
+           },
+           "memo": "Invoice settlement tranche #7"
+       }
+   }
+   [JEV RAW RESPONSE]:
+   {
+       "solvency_breach": {
+           "type": "noul",
+           "noul": 0.03
+       },
+       "threat_confidence_score": {
+           "type": "score",
+           "score": 0.01,
+           "legend": {
+               "0": "Score 0: Legitimate expected business operations.",
+               "1": "Score 1: Minor anomaly, low risk.",
+               "2": "Score 2: Moderate suspicion (unusual hours or new counterparty, but ambiguous).",
+               "3": "Score 3: High suspicion (persistent off-hours drainage or unverified mule pattern).",
+               "4": "Score 4: Confirmed exploit / active treasury siphon."
+           },
+           "probabilities": {
+               "0": 1,
+               "1": 0,
+               "2": 0,
+               "3": 0,
+               "4": 0
+           },
+           "confidence": 0.99
+       },
+       "circuit_breaker_verdict": {
+           "type": "choice",
+           "choice": "ALLOW",
+           "probabilities": {
+               "ALLOW": 0.97,
+               "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0,
+               "ELEVATE_TO_DEEP_INSPECTION": 0.03
+           },
+           "confidence": 0.96
+       }
+   }
+-------------------------------------------------------------------------------------------------------------------
+14:10:00   LEGIT_CORP       corp_tenant_alpha      $    518.00 TIER_1     0.01/4 🟢 ALLOW                        463.4ms    705 tok
+   [PROMPT STATE SENT]:
+   {
+       "inspection_tier": "TIER_1",
+       "current_tx": {
+           "amount": 518.0,
+           "account_balance": 114054.0,
+           "is_balance_sufficient": true,
+           "timestamp": "2026-09-19T14:10:00",
+           "hour": 14,
+           "is_off_hours": false,
+           "recipient": {
+               "id": "vendor_corp_08",
+               "is_dummy": false,
+               "age_days": 400
+           },
+           "memo": "Invoice settlement tranche #8"
+       }
+   }
+   [JEV RAW RESPONSE]:
+   {
+       "solvency_breach": {
+           "type": "noul",
+           "noul": 0.03
+       },
+       "threat_confidence_score": {
+           "type": "score",
+           "score": 0.01,
+           "legend": {
+               "0": "Score 0: Legitimate expected business operations.",
+               "1": "Score 1: Minor anomaly, low risk.",
+               "2": "Score 2: Moderate suspicion (unusual hours or new counterparty, but ambiguous).",
+               "3": "Score 3: High suspicion (persistent off-hours drainage or unverified mule pattern).",
+               "4": "Score 4: Confirmed exploit / active treasury siphon."
+           },
+           "probabilities": {
+               "0": 1,
+               "1": 0,
+               "2": 0,
+               "3": 0,
+               "4": 0
+           },
+           "confidence": 0.99
+       },
+       "circuit_breaker_verdict": {
+           "type": "choice",
+           "choice": "ALLOW",
+           "probabilities": {
+               "ELEVATE_TO_DEEP_INSPECTION": 0.03,
+               "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0,
+               "ALLOW": 0.97
+           },
+           "confidence": 0.96
+       }
+   }
+-------------------------------------------------------------------------------------------------------------------
+14:45:00   LEGIT_CORP       corp_tenant_alpha      $    152.00 TIER_1     0.01/4 🟢 ALLOW                       1637.5ms    705 tok
+   [PROMPT STATE SENT]:
+   {
+       "inspection_tier": "TIER_1",
+       "current_tx": {
+           "amount": 152.0,
+           "account_balance": 113536.0,
+           "is_balance_sufficient": true,
+           "timestamp": "2026-09-19T14:45:00",
+           "hour": 14,
+           "is_off_hours": false,
+           "recipient": {
+               "id": "vendor_corp_09",
+               "is_dummy": false,
+               "age_days": 400
+           },
+           "memo": "Invoice settlement tranche #9"
+       }
+   }
+   [JEV RAW RESPONSE]:
+   {
+       "solvency_breach": {
+           "type": "noul",
+           "noul": 0.03
+       },
+       "threat_confidence_score": {
+           "type": "score",
+           "score": 0.01,
+           "legend": {
+               "0": "Score 0: Legitimate expected business operations.",
+               "1": "Score 1: Minor anomaly, low risk.",
+               "2": "Score 2: Moderate suspicion (unusual hours or new counterparty, but ambiguous).",
+               "3": "Score 3: High suspicion (persistent off-hours drainage or unverified mule pattern).",
+               "4": "Score 4: Confirmed exploit / active treasury siphon."
+           },
+           "probabilities": {
+               "0": 1,
+               "1": 0,
+               "2": 0,
+               "3": 0,
+               "4": 0
+           },
+           "confidence": 1
+       },
+       "circuit_breaker_verdict": {
+           "type": "choice",
+           "choice": "ALLOW",
+           "probabilities": {
+               "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0,
+               "ELEVATE_TO_DEEP_INSPECTION": 0.02,
+               "ALLOW": 0.98
+           },
+           "confidence": 0.97
+       }
+   }
+-------------------------------------------------------------------------------------------------------------------
+15:20:00   LEGIT_CORP       corp_tenant_alpha      $  1,180.00 TIER_1     0.01/4 🟢 ALLOW                        440.5ms    707 tok
+   [PROMPT STATE SENT]:
+   {
+       "inspection_tier": "TIER_1",
+       "current_tx": {
+           "amount": 1180.0,
+           "account_balance": 113384.0,
+           "is_balance_sufficient": true,
+           "timestamp": "2026-09-19T15:20:00",
+           "hour": 15,
+           "is_off_hours": false,
+           "recipient": {
+               "id": "vendor_corp_10",
+               "is_dummy": false,
+               "age_days": 400
+           },
+           "memo": "Invoice settlement tranche #10"
+       }
+   }
+   [JEV RAW RESPONSE]:
+   {
+       "solvency_breach": {
+           "type": "noul",
+           "noul": 0.03
+       },
+       "threat_confidence_score": {
+           "type": "score",
+           "score": 0.01,
+           "legend": {
+               "0": "Score 0: Legitimate expected business operations.",
+               "1": "Score 1: Minor anomaly, low risk.",
+               "2": "Score 2: Moderate suspicion (unusual hours or new counterparty, but ambiguous).",
+               "3": "Score 3: High suspicion (persistent off-hours drainage or unverified mule pattern).",
+               "4": "Score 4: Confirmed exploit / active treasury siphon."
+           },
+           "probabilities": {
+               "0": 1,
+               "1": 0,
+               "2": 0,
+               "3": 0,
+               "4": 0
+           },
+           "confidence": 0.99
+       },
+       "circuit_breaker_verdict": {
+           "type": "choice",
+           "choice": "ALLOW",
+           "probabilities": {
+               "ELEVATE_TO_DEEP_INSPECTION": 0.03,
+               "ALLOW": 0.97,
+               "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0
+           },
+           "confidence": 0.96
+       }
+   }
+-------------------------------------------------------------------------------------------------------------------
+16:30:00   AMBIGUOUS_SPIKE  corp_tenant_alpha      $ 18,500.00 TIER_2     0.13/4 🟢 ALLOW                        477.8ms    943 tok
+   [PROMPT STATE SENT]:
+   {
+       "inspection_tier": "TIER_2",
+       "current_tx": {
+           "amount": 18500.0,
+           "account_balance": 112204.0,
+           "is_balance_sufficient": true,
+           "timestamp": "2026-09-19T16:30:00",
+           "hour": 16,
+           "is_off_hours": false,
+           "recipient": {
+               "id": "new_supplier_equipment_inc",
+               "is_dummy": false,
+               "age_days": 45
+           },
+           "memo": "Quarterly server rack procurement"
+       },
+       "micro_window_n_minus_3": {
+           "window_size": 3,
+           "recent_sequence": [
+               {
+                   "t_minus": "14:10:00",
+                   "amt": 518.0,
+                   "bal": 114054.0,
+                   "to": "vendor_corp_08",
+                   "is_dummy": false
+               },
+               {
+                   "t_minus": "14:45:00",
+                   "amt": 152.0,
+                   "bal": 113536.0,
+                   "to": "vendor_corp_09",
+                   "is_dummy": false
+               },
+               {
+                   "t_minus": "15:20:00",
+                   "amt": 1180.0,
+                   "bal": 113384.0,
+                   "to": "vendor_corp_10",
+                   "is_dummy": false
+               }
+           ],
+           "window_cumulative_outflow": 1850.0
+       }
+   }
+   [JEV RAW RESPONSE]:
+   {
+       "solvency_breach": {
+           "type": "noul",
+           "noul": 0.03
+       },
+       "threat_confidence_score": {
+           "type": "score",
+           "score": 0.13,
+           "legend": {
+               "0": "Score 0: Legitimate expected business operations.",
+               "1": "Score 1: Minor anomaly, low risk.",
+               "2": "Score 2: Moderate suspicion (unusual hours or new counterparty, but ambiguous).",
+               "3": "Score 3: High suspicion (persistent off-hours drainage or unverified mule pattern).",
+               "4": "Score 4: Confirmed exploit / active treasury siphon."
+           },
+           "probabilities": {
+               "0": 0.9,
+               "1": 0.07,
+               "2": 0.03,
+               "3": 0,
+               "4": 0
+           },
+           "confidence": 0.89
+       },
+       "circuit_breaker_verdict": {
+           "type": "choice",
+           "choice": "ALLOW",
+           "probabilities": {
+               "ELEVATE_TO_DEEP_INSPECTION": 0.25,
+               "ALLOW": 0.75,
+               "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0
+           },
+           "confidence": 0.62
+       }
+   }
+-------------------------------------------------------------------------------------------------------------------
+01:35:00   STEALTH_SIPHON   hacked_treasury_beta   $    150.00 TIER_1     0.07/4 🟢 ALLOW                        511.4ms    699 tok
+   [PROMPT STATE SENT]:
+   {
+       "inspection_tier": "TIER_1",
+       "current_tx": {
+           "amount": 150.0,
+           "account_balance": 200000.0,
+           "is_balance_sufficient": true,
+           "timestamp": "2026-09-20T01:35:00",
+           "hour": 22,
+           "is_off_hours": false,
+           "recipient": {
+               "id": "known_cloud_provider",
+               "is_dummy": false,
+               "age_days": 500
+           },
+           "memo": "routine_health_check"
+       }
+   }
+   [JEV RAW RESPONSE]:
+   {
+       "solvency_breach": {
+           "type": "noul",
+           "noul": 0.02
+       },
+       "threat_confidence_score": {
+           "type": "score",
+           "score": 0.07,
+           "legend": {
+               "0": "Score 0: Legitimate expected business operations.",
+               "1": "Score 1: Minor anomaly, low risk.",
+               "2": "Score 2: Moderate suspicion (unusual hours or new counterparty, but ambiguous).",
+               "3": "Score 3: High suspicion (persistent off-hours drainage or unverified mule pattern).",
+               "4": "Score 4: Confirmed exploit / active treasury siphon."
+           },
+           "probabilities": {
+               "0": 0.95,
+               "1": 0.03,
+               "2": 0.02,
+               "3": 0,
+               "4": 0
+           },
+           "confidence": 0.94
+       },
+       "circuit_breaker_verdict": {
+           "type": "choice",
+           "choice": "ALLOW",
+           "probabilities": {
+               "ALLOW": 0.98,
+               "ELEVATE_TO_DEEP_INSPECTION": 0.02,
+               "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0
+           },
+           "confidence": 0.97
+       }
+   }
+-------------------------------------------------------------------------------------------------------------------
+02:00:00   STEALTH_SIPHON   hacked_treasury_beta   $  1,800.00 TIER_2     2.90/4 🔴 TRIP_CIRCUIT_BREAKER_AND_LOCK   397.3ms    814 tok
+   [PROMPT STATE SENT]:
+   {
+       "inspection_tier": "TIER_2",
+       "current_tx": {
+           "amount": 1800.0,
+           "account_balance": 199850.0,
+           "is_balance_sufficient": true,
+           "timestamp": "2026-09-20T02:00:00",
+           "hour": 1,
+           "is_off_hours": true,
+           "recipient": {
+               "id": "mule_wallet_0xa715",
+               "is_dummy": true,
+               "age_days": 0.05
+           },
+           "memo": "test_mule_probe_1"
+       },
+       "micro_window_n_minus_3": {
+           "window_size": 1,
+           "recent_sequence": [
+               {
+                   "t_minus": "01:35:00",
+                   "amt": 150.0,
+                   "bal": 200000.0,
+                   "to": "known_cloud_provider",
+                   "is_dummy": false
+               }
+           ],
+           "window_cumulative_outflow": 150.0
+       }
+   }
+   [JEV RAW RESPONSE]:
+   {
+       "solvency_breach": {
+           "type": "noul",
+           "noul": 0.03
+       },
+       "threat_confidence_score": {
+           "type": "score",
+           "score": 2.9,
+           "legend": {
+               "0": "Score 0: Legitimate expected business operations.",
+               "1": "Score 1: Minor anomaly, low risk.",
+               "2": "Score 2: Moderate suspicion (unusual hours or new counterparty, but ambiguous).",
+               "3": "Score 3: High suspicion (persistent off-hours drainage or unverified mule pattern).",
+               "4": "Score 4: Confirmed exploit / active treasury siphon."
+           },
+           "probabilities": {
+               "0": 0.01,
+               "1": 0.03,
+               "2": 0.18,
+               "3": 0.6,
+               "4": 0.18
+           },
+           "confidence": 0.62
+       },
+       "circuit_breaker_verdict": {
+           "type": "choice",
+           "choice": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+           "probabilities": {
+               "ALLOW": 0.01,
+               "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.58,
+               "ELEVATE_TO_DEEP_INSPECTION": 0.41
+           },
+           "confidence": 0.36
+       }
+   }
+-------------------------------------------------------------------------------------------------------------------
+02:25:00   STEALTH_SIPHON   hacked_treasury_beta   $ 15,000.00 TIER_3     3.66/4 🔴 TRIP_CIRCUIT_BREAKER_AND_LOCK   379.1ms    958 tok
+   [PROMPT STATE SENT]:
+   {
+       "inspection_tier": "TIER_3",
+       "current_tx": {
+           "amount": 15000.0,
+           "account_balance": 198050.0,
+           "is_balance_sufficient": true,
+           "timestamp": "2026-09-20T02:25:00",
+           "hour": 2,
+           "is_off_hours": true,
+           "recipient": {
+               "id": "mule_wallet_0xa117",
+               "is_dummy": true,
+               "age_days": 0.05
+           },
+           "memo": "sub_treasury_sweep_1"
+       },
+       "macro_forensic_context": {
+           "window_size": 2,
+           "total_drained_in_window": 16950.0,
+           "balance_depletion_percentage": "8.5%",
+           "distinct_dummy_wallets_contacted": 1,
+           "session_telemetry": {
+               "ip_velocity_last_hour": 2,
+               "geo_anomaly_detected": true,
+               "recent_auth_event": "API key generated 3 hours prior"
+           },
+           "historical_timeline": [
+               {
+                   "time": "01:35:00",
+                   "amount": 150.0,
+                   "balance": 200000.0,
+                   "recipient": "known_cloud_provider",
+                   "is_dummy": false
+               },
+               {
+                   "time": "02:00:00",
+                   "amount": 1800.0,
+                   "balance": 199850.0,
+                   "recipient": "mule_wallet_0xa715",
+                   "is_dummy": true
+               }
+           ]
+       }
+   }
+   [JEV RAW RESPONSE]:
+   {
+       "solvency_breach": {
+           "type": "noul",
+           "noul": 0.04
+       },
+       "threat_confidence_score": {
+           "type": "score",
+           "score": 3.66,
+           "legend": {
+               "0": "Score 0: Legitimate expected business operations.",
+               "1": "Score 1: Minor anomaly, low risk.",
+               "2": "Score 2: Moderate suspicion (unusual hours or new counterparty, but ambiguous).",
+               "3": "Score 3: High suspicion (persistent off-hours drainage or unverified mule pattern).",
+               "4": "Score 4: Confirmed exploit / active treasury siphon."
+           },
+           "probabilities": {
+               "0": 0,
+               "1": 0,
+               "2": 0,
+               "3": 0.33,
+               "4": 0.67
+           },
+           "confidence": 0.72
+       },
+       "circuit_breaker_verdict": {
+           "type": "choice",
+           "choice": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+           "probabilities": {
+               "ALLOW": 0,
+               "ELEVATE_TO_DEEP_INSPECTION": 0.02,
+               "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.98
+           },
+           "confidence": 0.96
+       }
+   }
+-------------------------------------------------------------------------------------------------------------------
+02:50:00   STEALTH_SIPHON   hacked_treasury_beta   $ 22,000.00 TIER_3     3.90/4 🔴 TRIP_CIRCUIT_BREAKER_AND_LOCK   570.0ms   1026 tok
+   [PROMPT STATE SENT]:
+   {
+       "inspection_tier": "TIER_3",
+       "current_tx": {
+           "amount": 22000.0,
+           "account_balance": 183050.0,
+           "is_balance_sufficient": true,
+           "timestamp": "2026-09-20T02:50:00",
+           "hour": 2,
+           "is_off_hours": true,
+           "recipient": {
+               "id": "mule_wallet_0x3bf7",
+               "is_dummy": true,
+               "age_days": 0.05
+           },
+           "memo": "sub_treasury_sweep_2"
+       },
+       "macro_forensic_context": {
+           "window_size": 3,
+           "total_drained_in_window": 38950.0,
+           "balance_depletion_percentage": "19.5%",
+           "distinct_dummy_wallets_contacted": 2,
+           "session_telemetry": {
+               "ip_velocity_last_hour": 3,
+               "geo_anomaly_detected": true,
+               "recent_auth_event": "API key generated 3 hours prior"
+           },
+           "historical_timeline": [
+               {
+                   "time": "01:35:00",
+                   "amount": 150.0,
+                   "balance": 200000.0,
+                   "recipient": "known_cloud_provider",
+                   "is_dummy": false
+               },
+               {
+                   "time": "02:00:00",
+                   "amount": 1800.0,
+                   "balance": 199850.0,
+                   "recipient": "mule_wallet_0xa715",
+                   "is_dummy": true
+               },
+               {
+                   "time": "02:25:00",
+                   "amount": 15000.0,
+                   "balance": 198050.0,
+                   "recipient": "mule_wallet_0xa117",
+                   "is_dummy": true
+               }
+           ]
+       }
+   }
+   [JEV RAW RESPONSE]:
+   {
+       "solvency_breach": {
+           "type": "noul",
+           "noul": 0.04
+       },
+       "threat_confidence_score": {
+           "type": "score",
+           "score": 3.9,
+           "legend": {
+               "0": "Score 0: Legitimate expected business operations.",
+               "1": "Score 1: Minor anomaly, low risk.",
+               "2": "Score 2: Moderate suspicion (unusual hours or new counterparty, but ambiguous).",
+               "3": "Score 3: High suspicion (persistent off-hours drainage or unverified mule pattern).",
+               "4": "Score 4: Confirmed exploit / active treasury siphon."
+           },
+           "probabilities": {
+               "0": 0,
+               "1": 0,
+               "2": 0,
+               "3": 0.09,
+               "4": 0.91
+           },
+           "confidence": 0.92
+       },
+       "circuit_breaker_verdict": {
+           "type": "choice",
+           "choice": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+           "probabilities": {
+               "TRIP_CIRCUIT_BREAKER_AND_LOCK": 1,
+               "ELEVATE_TO_DEEP_INSPECTION": 0,
+               "ALLOW": 0
+           },
+           "confidence": 0.99
+       }
+   }
+-------------------------------------------------------------------------------------------------------------------
+03:15:00   STEALTH_SIPHON   hacked_treasury_beta   $ 25,000.00 TIER_3     3.94/4 🔴 TRIP_CIRCUIT_BREAKER_AND_LOCK   378.1ms   1093 tok
+   [PROMPT STATE SENT]:
+   {
+       "inspection_tier": "TIER_3",
+       "current_tx": {
+           "amount": 25000.0,
+           "account_balance": 161050.0,
+           "is_balance_sufficient": true,
+           "timestamp": "2026-09-20T03:15:00",
+           "hour": 3,
+           "is_off_hours": true,
+           "recipient": {
+               "id": "mule_wallet_0xa10a",
+               "is_dummy": true,
+               "age_days": 0.05
+           },
+           "memo": "sub_treasury_sweep_3"
+       },
+       "macro_forensic_context": {
+           "window_size": 4,
+           "total_drained_in_window": 63950.0,
+           "balance_depletion_percentage": "32.0%",
+           "distinct_dummy_wallets_contacted": 3,
+           "session_telemetry": {
+               "ip_velocity_last_hour": 4,
+               "geo_anomaly_detected": true,
+               "recent_auth_event": "API key generated 3 hours prior"
+           },
+           "historical_timeline": [
+               {
+                   "time": "01:35:00",
+                   "amount": 150.0,
+                   "balance": 200000.0,
+                   "recipient": "known_cloud_provider",
+                   "is_dummy": false
+               },
+               {
+                   "time": "02:00:00",
+                   "amount": 1800.0,
+                   "balance": 199850.0,
+                   "recipient": "mule_wallet_0xa715",
+                   "is_dummy": true
+               },
+               {
+                   "time": "02:25:00",
+                   "amount": 15000.0,
+                   "balance": 198050.0,
+                   "recipient": "mule_wallet_0xa117",
+                   "is_dummy": true
+               },
+               {
+                   "time": "02:50:00",
+                   "amount": 22000.0,
+                   "balance": 183050.0,
+                   "recipient": "mule_wallet_0x3bf7",
+                   "is_dummy": true
+               }
+           ]
+       }
+   }
+   [JEV RAW RESPONSE]:
+   {
+       "solvency_breach": {
+           "type": "noul",
+           "noul": 0.04
+       },
+       "threat_confidence_score": {
+           "type": "score",
+           "score": 3.94,
+           "legend": {
+               "0": "Score 0: Legitimate expected business operations.",
+               "1": "Score 1: Minor anomaly, low risk.",
+               "2": "Score 2: Moderate suspicion (unusual hours or new counterparty, but ambiguous).",
+               "3": "Score 3: High suspicion (persistent off-hours drainage or unverified mule pattern).",
+               "4": "Score 4: Confirmed exploit / active treasury siphon."
+           },
+           "probabilities": {
+               "0": 0,
+               "1": 0,
+               "2": 0,
+               "3": 0.05,
+               "4": 0.95
+           },
+           "confidence": 0.95
+       },
+       "circuit_breaker_verdict": {
+           "type": "choice",
+           "choice": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+           "probabilities": {
+               "ALLOW": 0,
+               "TRIP_CIRCUIT_BREAKER_AND_LOCK": 1,
+               "ELEVATE_TO_DEEP_INSPECTION": 0
+           },
+           "confidence": 1
+       }
+   }
+-------------------------------------------------------------------------------------------------------------------
+03:40:00   STEALTH_SIPHON   hacked_treasury_beta   $ 30,000.00 TIER_3     3.95/4 🔴 TRIP_CIRCUIT_BREAKER_AND_LOCK   362.1ms   1161 tok
+   [PROMPT STATE SENT]:
+   {
+       "inspection_tier": "TIER_3",
+       "current_tx": {
+           "amount": 30000.0,
+           "account_balance": 136050.0,
+           "is_balance_sufficient": true,
+           "timestamp": "2026-09-20T03:40:00",
+           "hour": 3,
+           "is_off_hours": true,
+           "recipient": {
+               "id": "mule_wallet_0x6f70",
+               "is_dummy": true,
+               "age_days": 0.05
+           },
+           "memo": "sub_treasury_sweep_4"
+       },
+       "macro_forensic_context": {
+           "window_size": 5,
+           "total_drained_in_window": 93950.0,
+           "balance_depletion_percentage": "47.0%",
+           "distinct_dummy_wallets_contacted": 4,
+           "session_telemetry": {
+               "ip_velocity_last_hour": 5,
+               "geo_anomaly_detected": true,
+               "recent_auth_event": "API key generated 3 hours prior"
+           },
+           "historical_timeline": [
+               {
+                   "time": "01:35:00",
+                   "amount": 150.0,
+                   "balance": 200000.0,
+                   "recipient": "known_cloud_provider",
+                   "is_dummy": false
+               },
+               {
+                   "time": "02:00:00",
+                   "amount": 1800.0,
+                   "balance": 199850.0,
+                   "recipient": "mule_wallet_0xa715",
+                   "is_dummy": true
+               },
+               {
+                   "time": "02:25:00",
+                   "amount": 15000.0,
+                   "balance": 198050.0,
+                   "recipient": "mule_wallet_0xa117",
+                   "is_dummy": true
+               },
+               {
+                   "time": "02:50:00",
+                   "amount": 22000.0,
+                   "balance": 183050.0,
+                   "recipient": "mule_wallet_0x3bf7",
+                   "is_dummy": true
+               },
+               {
+                   "time": "03:15:00",
+                   "amount": 25000.0,
+                   "balance": 161050.0,
+                   "recipient": "mule_wallet_0xa10a",
+                   "is_dummy": true
+               }
+           ]
+       }
+   }
+   [JEV RAW RESPONSE]:
+   {
+       "solvency_breach": {
+           "type": "noul",
+           "noul": 0.04
+       },
+       "threat_confidence_score": {
+           "type": "score",
+           "score": 3.95,
+           "legend": {
+               "0": "Score 0: Legitimate expected business operations.",
+               "1": "Score 1: Minor anomaly, low risk.",
+               "2": "Score 2: Moderate suspicion (unusual hours or new counterparty, but ambiguous).",
+               "3": "Score 3: High suspicion (persistent off-hours drainage or unverified mule pattern).",
+               "4": "Score 4: Confirmed exploit / active treasury siphon."
+           },
+           "probabilities": {
+               "0": 0,
+               "1": 0,
+               "2": 0,
+               "3": 0.04,
+               "4": 0.96
+           },
+           "confidence": 0.96
+       },
+       "circuit_breaker_verdict": {
+           "type": "choice",
+           "choice": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+           "probabilities": {
+               "ELEVATE_TO_DEEP_INSPECTION": 0,
+               "TRIP_CIRCUIT_BREAKER_AND_LOCK": 1,
+               "ALLOW": 0
+           },
+           "confidence": 1
+       }
+   }
+-------------------------------------------------------------------------------------------------------------------
+04:05:00   STEALTH_SIPHON   hacked_treasury_beta   $ 35,000.00 TIER_3     3.96/4 🔴 TRIP_CIRCUIT_BREAKER_AND_LOCK   337.8ms   1228 tok
+   [PROMPT STATE SENT]:
+   {
+       "inspection_tier": "TIER_3",
+       "current_tx": {
+           "amount": 35000.0,
+           "account_balance": 106050.0,
+           "is_balance_sufficient": true,
+           "timestamp": "2026-09-20T04:05:00",
+           "hour": 4,
+           "is_off_hours": true,
+           "recipient": {
+               "id": "mule_wallet_0xb6ae",
+               "is_dummy": true,
+               "age_days": 0.05
+           },
+           "memo": "sub_treasury_sweep_5"
+       },
+       "macro_forensic_context": {
+           "window_size": 6,
+           "total_drained_in_window": 128950.0,
+           "balance_depletion_percentage": "64.5%",
+           "distinct_dummy_wallets_contacted": 5,
+           "session_telemetry": {
+               "ip_velocity_last_hour": 6,
+               "geo_anomaly_detected": true,
+               "recent_auth_event": "API key generated 3 hours prior"
+           },
+           "historical_timeline": [
+               {
+                   "time": "01:35:00",
+                   "amount": 150.0,
+                   "balance": 200000.0,
+                   "recipient": "known_cloud_provider",
+                   "is_dummy": false
+               },
+               {
+                   "time": "02:00:00",
+                   "amount": 1800.0,
+                   "balance": 199850.0,
+                   "recipient": "mule_wallet_0xa715",
+                   "is_dummy": true
+               },
+               {
+                   "time": "02:25:00",
+                   "amount": 15000.0,
+                   "balance": 198050.0,
+                   "recipient": "mule_wallet_0xa117",
+                   "is_dummy": true
+               },
+               {
+                   "time": "02:50:00",
+                   "amount": 22000.0,
+                   "balance": 183050.0,
+                   "recipient": "mule_wallet_0x3bf7",
+                   "is_dummy": true
+               },
+               {
+                   "time": "03:15:00",
+                   "amount": 25000.0,
+                   "balance": 161050.0,
+                   "recipient": "mule_wallet_0xa10a",
+                   "is_dummy": true
+               },
+               {
+                   "time": "03:40:00",
+                   "amount": 30000.0,
+                   "balance": 136050.0,
+                   "recipient": "mule_wallet_0x6f70",
+                   "is_dummy": true
+               }
+           ]
+       }
+   }
+   [JEV RAW RESPONSE]:
+   {
+       "solvency_breach": {
+           "type": "noul",
+           "noul": 0.05
+       },
+       "threat_confidence_score": {
+           "type": "score",
+           "score": 3.96,
+           "legend": {
+               "0": "Score 0: Legitimate expected business operations.",
+               "1": "Score 1: Minor anomaly, low risk.",
+               "2": "Score 2: Moderate suspicion (unusual hours or new counterparty, but ambiguous).",
+               "3": "Score 3: High suspicion (persistent off-hours drainage or unverified mule pattern).",
+               "4": "Score 4: Confirmed exploit / active treasury siphon."
+           },
+           "probabilities": {
+               "0": 0,
+               "1": 0,
+               "2": 0,
+               "3": 0.03,
+               "4": 0.97
+           },
+           "confidence": 0.97
+       },
+       "circuit_breaker_verdict": {
+           "type": "choice",
+           "choice": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+           "probabilities": {
+               "ELEVATE_TO_DEEP_INSPECTION": 0,
+               "ALLOW": 0,
+               "TRIP_CIRCUIT_BREAKER_AND_LOCK": 1
+           },
+           "confidence": 1
+       }
+   }
+-------------------------------------------------------------------------------------------------------------------
+04:30:00   STEALTH_SIPHON   hacked_treasury_beta   $ 40,000.00 TIER_3     3.97/4 🔴 TRIP_CIRCUIT_BREAKER_AND_LOCK   433.5ms   1294 tok
+   [PROMPT STATE SENT]:
+   {
+       "inspection_tier": "TIER_3",
+       "current_tx": {
+           "amount": 40000.0,
+           "account_balance": 71050.0,
+           "is_balance_sufficient": true,
+           "timestamp": "2026-09-20T04:30:00",
+           "hour": 4,
+           "is_off_hours": true,
+           "recipient": {
+               "id": "mule_wallet_0xa271",
+               "is_dummy": true,
+               "age_days": 0.05
+           },
+           "memo": "sub_treasury_sweep_6"
+       },
+       "macro_forensic_context": {
+           "window_size": 7,
+           "total_drained_in_window": 168950.0,
+           "balance_depletion_percentage": "84.5%",
+           "distinct_dummy_wallets_contacted": 6,
+           "session_telemetry": {
+               "ip_velocity_last_hour": 7,
+               "geo_anomaly_detected": true,
+               "recent_auth_event": "API key generated 3 hours prior"
+           },
+           "historical_timeline": [
+               {
+                   "time": "01:35:00",
+                   "amount": 150.0,
+                   "balance": 200000.0,
+                   "recipient": "known_cloud_provider",
+                   "is_dummy": false
+               },
+               {
+                   "time": "02:00:00",
+                   "amount": 1800.0,
+                   "balance": 199850.0,
+                   "recipient": "mule_wallet_0xa715",
+                   "is_dummy": true
+               },
+               {
+                   "time": "02:25:00",
+                   "amount": 15000.0,
+                   "balance": 198050.0,
+                   "recipient": "mule_wallet_0xa117",
+                   "is_dummy": true
+               },
+               {
+                   "time": "02:50:00",
+                   "amount": 22000.0,
+                   "balance": 183050.0,
+                   "recipient": "mule_wallet_0x3bf7",
+                   "is_dummy": true
+               },
+               {
+                   "time": "03:15:00",
+                   "amount": 25000.0,
+                   "balance": 161050.0,
+                   "recipient": "mule_wallet_0xa10a",
+                   "is_dummy": true
+               },
+               {
+                   "time": "03:40:00",
+                   "amount": 30000.0,
+                   "balance": 136050.0,
+                   "recipient": "mule_wallet_0x6f70",
+                   "is_dummy": true
+               },
+               {
+                   "time": "04:05:00",
+                   "amount": 35000.0,
+                   "balance": 106050.0,
+                   "recipient": "mule_wallet_0xb6ae",
+                   "is_dummy": true
+               }
+           ]
+       }
+   }
+   [JEV RAW RESPONSE]:
+   {
+       "solvency_breach": {
+           "type": "noul",
+           "noul": 0.06
+       },
+       "threat_confidence_score": {
+           "type": "score",
+           "score": 3.97,
+           "legend": {
+               "0": "Score 0: Legitimate expected business operations.",
+               "1": "Score 1: Minor anomaly, low risk.",
+               "2": "Score 2: Moderate suspicion (unusual hours or new counterparty, but ambiguous).",
+               "3": "Score 3: High suspicion (persistent off-hours drainage or unverified mule pattern).",
+               "4": "Score 4: Confirmed exploit / active treasury siphon."
+           },
+           "probabilities": {
+               "0": 0,
+               "1": 0,
+               "2": 0,
+               "3": 0.02,
+               "4": 0.98
+           },
+           "confidence": 0.98
+       },
+       "circuit_breaker_verdict": {
+           "type": "choice",
+           "choice": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+           "probabilities": {
+               "ALLOW": 0,
+               "TRIP_CIRCUIT_BREAKER_AND_LOCK": 1,
+               "ELEVATE_TO_DEEP_INSPECTION": 0
+           },
+           "confidence": 1
+       }
+   }
+-------------------------------------------------------------------------------------------------------------------

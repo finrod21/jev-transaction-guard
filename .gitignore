@@ -1,0 +1,53 @@
+# Environment variables and secrets
+.env
+*.env
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environments
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Logs and runtime artifacts
+*.log
+*.audit.json
+simulation_run.log
+simulation_audit_log.json
+dynamic_tier_run.log
+dynamic_tier_audit_log.json
+
+# Whitelist example logs directory
+!example_logs/
+!example_logs/**
+
+# IDE & OS files
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
