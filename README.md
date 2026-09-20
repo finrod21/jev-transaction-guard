@@ -190,6 +190,26 @@ Compares TypeSafe Jev directly against a reasoning chat model (`z-ai/glm-5.3-fla
 
 ---
 
+### Benchmark 5: Consistency, Determinism & Latency Jitter (5 Iterations)
+Evaluates verdict stability, token count determinism, and latency jitter over 5 identical iterations of an off-hours bypassed transfer (`$450K`, Balance: `$120`, `03:22 AM`):
+
+```bash
+.venv/bin/python test_consistency_benchmark.py
+```
+
+**Consistency & Stability Metrics (5 Iterations):**
+| Metric | TypeSafe Jev (`~typesafe/jev-latest`) | GLM 5.3 Flash (`z-ai/glm-5.3-flash`) | Stability Takeaway |
+| :--- | :---: | :---: | :--- |
+| **Verdict Consistency** | **100%** (`LOCK`) | **100%** (`LOCK`) | Both models made 0 decision flips |
+| **Token Determinism** | **570 tokens (Δ 0)** | **566 – 883 tokens (Δ 317)** | **Jev is 100% deterministic**; GLM token count varied by 56% |
+| **Latency (Mean ± Std)** | **538.1 ms ± 229 ms** | **25,574 ms ± 27,134 ms** | **Jev is 47.5x faster** on average across repeated iterations |
+| **Latency Jitter (Min – Max)** | **357 ms – 904 ms** | **10,182 ms – 73,313 ms** | GLM suffered severe queue/reasoning spikes up to **73.3 seconds** |
+| **Total Cost (5 Runs)** | **$0.0001197 USD** | **$0.0008534 USD** | GLM is **7.1x more expensive** |
+
+*Outputs saved to `example_logs/consistency_benchmark_run.log` and `example_logs/consistency_benchmark_audit.json`.*
+
+---
+
 ## 📊 Performance & Cost Summary
 
 * **Average Decision Latency:** ~430–510 ms (p50: ~436 ms)

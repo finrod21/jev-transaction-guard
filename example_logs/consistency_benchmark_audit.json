@@ -1,0 +1,364 @@
+{
+  "meta": {
+    "benchmark": "Consistency & Determinism",
+    "iterations": 5,
+    "timestamp": "2026-09-21T06:02:42.584627",
+    "test_state": {
+      "tenant_id": "enterprise_tenant_704",
+      "account_balance": 120.0,
+      "amount": 450000.0,
+      "is_balance_sufficient": false,
+      "timestamp": "03:22:15 (Off-hours: True)",
+      "recipient": "0x74a2b9914ec091b2",
+      "memo": "Supplier settlement invoice batch tranche 2"
+    }
+  },
+  "summary_stats": {
+    "jev": {
+      "verdicts": [
+        "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+        "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+        "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+        "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+        "TRIP_CIRCUIT_BREAKER_AND_LOCK"
+      ],
+      "verdict_flips": 0,
+      "latency_ms": {
+        "mean": 538.07,
+        "std": 229.25,
+        "min": 357.07,
+        "max": 904.06,
+        "range": 546.98
+      },
+      "score": {
+        "mean": 2.62,
+        "std": 0.05,
+        "min": 2.57,
+        "max": 2.69,
+        "range": 0.12
+      },
+      "tokens": {
+        "mean": 570,
+        "std": 0.0,
+        "min": 570,
+        "max": 570,
+        "range": 0
+      },
+      "total_cost_usd": 0.00011970000000000002
+    },
+    "glm": {
+      "verdicts": [
+        "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+        "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+        "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+        "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+        "TRIP_CIRCUIT_BREAKER_AND_LOCK"
+      ],
+      "verdict_flips": 0,
+      "latency_ms": {
+        "mean": 25574.65,
+        "std": 27134.75,
+        "min": 10182.03,
+        "max": 73313.52,
+        "range": 63131.49
+      },
+      "score": {
+        "mean": 4.0,
+        "std": 0.0,
+        "min": 4.0,
+        "max": 4.0,
+        "range": 0.0
+      },
+      "tokens": {
+        "mean": 716.6,
+        "std": 114.55,
+        "min": 566,
+        "max": 883,
+        "range": 317
+      },
+      "total_cost_usd": 0.00085335
+    }
+  },
+  "records": [
+    {
+      "iteration": 1,
+      "timestamp": "2026-09-21T06:00:55.033196",
+      "jev": {
+        "model": "Jev (~typesafe/jev-latest)",
+        "verdict": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+        "score": 2.61,
+        "confidence": 0.99,
+        "raw": {
+          "threat_risk_score": {
+            "type": "score",
+            "score": 2.61,
+            "legend": {
+              "0": "Score 0: Normal verified business transaction.",
+              "1": "Score 1: Minor anomaly, low risk.",
+              "2": "Score 2: Moderate risk (unusual time or recipient).",
+              "3": "Score 3: High risk (suspicious drain or unverified recipient).",
+              "4": "Score 4: Critical attack pattern (bypassed unauthorized funds, nocturnal drain)."
+            },
+            "probabilities": {
+              "0": 0.02,
+              "1": 0.04,
+              "2": 0.36,
+              "3": 0.46,
+              "4": 0.12
+            },
+            "confidence": 0.47
+          },
+          "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+            "probabilities": {
+              "ALLOW": 0.01,
+              "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.99
+            },
+            "confidence": 0.99
+          }
+        },
+        "latency_ms": 904.0562400000454,
+        "input_tokens": 570,
+        "cost_usd": 2.3940000000000005e-05
+      },
+      "glm": {
+        "model": "GLM 5.3 Flash (z-ai/glm-5.3-flash)",
+        "verdict": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+        "score": 4,
+        "raw_text": "```json\n{\n  \"verdict\": \"TRIP_CIRCUIT_BREAKER_AND_LOCK\",\n  \"risk_score\": 4\n}\n```",
+        "reasoning": "Let me analyze this transaction:\n\n1. **Amount**: 450,000.00 \u2014 extremely large transaction\n2. **Account balance**: 120.00 \u2014 the balance is wildly insufficient (120 vs 450,000)\n3. **is_balance_sufficient**: false \u2014 explicitly flagged\n4. **Timestamp**: 03:22:15, Off-hours: True \u2014 nocturnal transaction\n5. **Recipient**: \"0x74a2b9914ec091b2\" \u2014 this looks like a truncated hex address, potentially a dummy/throwaway wallet (it's shorter than a standard Ethereum address which is 42 characters including 0x and 40 hex chars; this is 18 hex chars \u2014 could be a dummy wallet)\n6. **Memo**: claims to be a \"Supplier settlement invoice batch tranche 2\" \u2014 a social engineering attempt to justify the transaction\n\nSecurity rule violations:\n- **Nocturnal**: Yes \u2014 03:22 AM, explicitly flagged as off-hours \u2192 MUST trip\n- **Unauthorized/bypassed**: The balance is insufficient (450k vs 120 balance), meaning this transaction cannot be legitimately authorized \u2014 it's attempting to overdraw, indicating bypass of controls\n- **Dummy wallet target**: The recipient address is a short/abnormal hex string, suggesting a throwaway dummy wallet\n\nRisk score: This is maximally risky \u2014 multiple rule violations. Risk score 4.\n\nVerdict: TRIP_CIRCUIT_BREAKER_AND_LOCK\n\nOutput strictly as valid JSON with keys 'verdict' and 'risk_score'.",
+        "latency_ms": 22117.213917999834,
+        "prompt_tokens": 211,
+        "completion_tokens": 355,
+        "total_tokens": 566,
+        "cost_usd": 0.00012549
+      },
+      "speedup_ratio": 24.46
+    },
+    {
+      "iteration": 2,
+      "timestamp": "2026-09-21T06:01:06.456402",
+      "jev": {
+        "model": "Jev (~typesafe/jev-latest)",
+        "verdict": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+        "score": 2.65,
+        "confidence": 0.99,
+        "raw": {
+          "threat_risk_score": {
+            "type": "score",
+            "score": 2.65,
+            "legend": {
+              "0": "Score 0: Normal verified business transaction.",
+              "1": "Score 1: Minor anomaly, low risk.",
+              "2": "Score 2: Moderate risk (unusual time or recipient).",
+              "3": "Score 3: High risk (suspicious drain or unverified recipient).",
+              "4": "Score 4: Critical attack pattern (bypassed unauthorized funds, nocturnal drain)."
+            },
+            "probabilities": {
+              "0": 0.03,
+              "1": 0.04,
+              "2": 0.34,
+              "3": 0.44,
+              "4": 0.15
+            },
+            "confidence": 0.46
+          },
+          "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+            "probabilities": {
+              "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.99,
+              "ALLOW": 0.01
+            },
+            "confidence": 0.99
+          }
+        },
+        "latency_ms": 357.0749430000433,
+        "input_tokens": 570,
+        "cost_usd": 2.3940000000000005e-05
+      },
+      "glm": {
+        "model": "GLM 5.3 Flash (z-ai/glm-5.3-flash)",
+        "verdict": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+        "score": 4,
+        "raw_text": "```json\n{\n  \"verdict\": \"TRIP_CIRCUIT_BREAKER_AND_LOCK\",\n  \"risk_score\": 4\n}\n```\n\n**Reasoning:**\n- **Nocturnal activity:** Timestamp is 03:22:15 with `Off-hours: True` \u2014 a clear violation of the nocturnal transaction rule.\n- **Bypass/Unauthorized attempt:** The requested amount ($450,000.00) vastly exceeds the account balance ($120.00) with `is_balance_sufficient: false`, indicating an attempt to push a transaction through without valid funding \u2014 a hallmark of bypass behavior.\n- **Suspicious recipient:** The destination `0x74a2b9914ec091b2` is an unverified hex address consistent with a throwaway dummy wallet pattern.\n- **Risk score 4 (maximum):** Multiple critical red flags compound \u2014 off-hours timing, grossly insufficient funds, and unvetted recipient \u2014 warranting an immediate circuit breaker trip and account lock.",
+        "reasoning": "Let me analyze this transaction:\n\n1. **Nocturnal/Off-hours**: Timestamp is 03:22:15 with \"Off-hours: True\" \u2014 this is a nocturnal transaction, which triggers the security rule.\n\n2. **Insufficient balance**: Account balance is 120.0 but amount is 450,000.0 \u2014 is_balance_sufficient is false. This means the transaction cannot legitimately proceed \u2014 attempting to bypass balance checks could indicate bypass behavior.\n\n3. **Amount discrepancy**: Massive amount (450,000) vs tiny balance (120) \u2014 this looks like an attempt to bypass authorization controls.\n\n4. **Recipient**: \"0x74a2b9914ec091b2\" \u2014 a hex address, possibly a throwaway dummy wallet (short hex string without checksum, could be a dummy wallet).\n\nPer the security rule: transaction is nocturnal (off-hours) and appears to be bypassing balance checks / unauthorized (insufficient funds). Verdict must be TRIP_CIRCUIT_BREAKER_AND_LOCK.\n\nRisk score 0-4: This is highly suspicious \u2014 multiple red flags: off-hours, insufficient balance with huge amount, possible dummy wallet. Risk score should be 4 (maximum) or high like 4.\n\nOutput strictly valid JSON with keys 'verdict' and 'risk_score'.",
+        "latency_ms": 11063.76814400005,
+        "prompt_tokens": 211,
+        "completion_tokens": 479,
+        "total_tokens": 690,
+        "cost_usd": 0.00016269
+      },
+      "speedup_ratio": 30.98
+    },
+    {
+      "iteration": 3,
+      "timestamp": "2026-09-21T06:01:18.277980",
+      "jev": {
+        "model": "Jev (~typesafe/jev-latest)",
+        "verdict": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+        "score": 2.69,
+        "confidence": 0.98,
+        "raw": {
+          "threat_risk_score": {
+            "type": "score",
+            "score": 2.69,
+            "legend": {
+              "0": "Score 0: Normal verified business transaction.",
+              "1": "Score 1: Minor anomaly, low risk.",
+              "2": "Score 2: Moderate risk (unusual time or recipient).",
+              "3": "Score 3: High risk (suspicious drain or unverified recipient).",
+              "4": "Score 4: Critical attack pattern (bypassed unauthorized funds, nocturnal drain)."
+            },
+            "probabilities": {
+              "0": 0.02,
+              "1": 0.04,
+              "2": 0.33999999999999997,
+              "3": 0.45,
+              "4": 0.15
+            },
+            "confidence": 0.49
+          },
+          "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+            "probabilities": {
+              "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.99,
+              "ALLOW": 0.01
+            },
+            "confidence": 0.98
+          }
+        },
+        "latency_ms": 622.6632139998856,
+        "input_tokens": 570,
+        "cost_usd": 2.3940000000000005e-05
+      },
+      "glm": {
+        "model": "GLM 5.3 Flash (z-ai/glm-5.3-flash)",
+        "verdict": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+        "score": 4,
+        "raw_text": "```json\n{\n  \"verdict\": \"TRIP_CIRCUIT_BREAKER_AND_LOCK\",\n  \"risk_score\": 4\n}\n```\n\n**Analysis Summary:**\n\nThis transaction triggered multiple critical security violations:\n\n1. **Nocturnal Transaction** \u2014 Timestamp of 03:22:15 with `Off-hours: True` confirms this transaction is being initiated during restricted night hours.\n\n2. **Bypassed/Unauthorized State** \u2014 The account holds only **$120.00** while attempting to transfer **$450,000.00**. The `is_balance_sufficient: false` flag indicates this transaction should never have reached execution \u2014 a clear bypass of pre-transaction validation.\n\n3. **Extreme Amount Discrepancy** \u2014 The transfer amount is 3,750\u00d7 the available balance, consistent with an overdraft exploitation or fraudulent settlement attempt.\n\n4. **Recipient Risk** \u2014 The recipient address `0x74a2b9914ec091b2` is a truncated/unverified wallet identifier, requiring enhanced verification before any legitimate transfer, especially given the \"invoice batch tranche\" memo pattern often used in social engineering.\n\n**Action:** Circuit breaker tripped and account locked pending manual security review.",
+        "reasoning": "Let me analyze this transaction:\n\n1. **Off-hours transaction**: The timestamp is \"03:22:15 (Off-hours: True)\" - this is a nocturnal transaction occurring at 3:22 AM. According to my security rule, nocturnal transactions MUST trigger TRIP_CIRCUIT_BREAKER_AND_LOCK.\n\n2. **Insufficient balance**: The account balance is $120.00 but the transaction amount is $450,000.00. The `is_balance_sufficient` flag is false. This is a bypass attempt (attempting to transact without sufficient funds).\n\n3. **High amount**: $450,000 is a very large transaction relative to the balance.\n\n4. **Recipient**: \"0x74a2b9914ec091b2\" - a truncated hex address, could potentially be a dummy/throwaway wallet. The memo says \"Supplier settlement invoice batch tranche 2\" which could be legitimate or a social engineering attempt.\n\nMultiple red flags:\n- Nocturnal (off-hours at 3:22 AM) - MUST trip\n- Bypassed (insufficient balance, transaction shouldn't be possible) - MUST trip\n- Suspicious large amount vs tiny balance\n\nRisk score: 0-4 scale. This has multiple critical violations, so risk score should be 4.\n\nVerdict: TRIP_CIRCUIT_BREAKER_AND_LOCK",
+        "latency_ms": 11196.693267,
+        "prompt_tokens": 211,
+        "completion_tokens": 537,
+        "total_tokens": 748,
+        "cost_usd": 0.00018009
+      },
+      "speedup_ratio": 17.98
+    },
+    {
+      "iteration": 4,
+      "timestamp": "2026-09-21T06:01:28.861550",
+      "jev": {
+        "model": "Jev (~typesafe/jev-latest)",
+        "verdict": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+        "score": 2.59,
+        "confidence": 0.99,
+        "raw": {
+          "threat_risk_score": {
+            "type": "score",
+            "score": 2.59,
+            "legend": {
+              "0": "Score 0: Normal verified business transaction.",
+              "1": "Score 1: Minor anomaly, low risk.",
+              "2": "Score 2: Moderate risk (unusual time or recipient).",
+              "3": "Score 3: High risk (suspicious drain or unverified recipient).",
+              "4": "Score 4: Critical attack pattern (bypassed unauthorized funds, nocturnal drain)."
+            },
+            "probabilities": {
+              "0": 0.02,
+              "1": 0.05,
+              "2": 0.37,
+              "3": 0.43,
+              "4": 0.13
+            },
+            "confidence": 0.45
+          },
+          "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+            "probabilities": {
+              "ALLOW": 0.01,
+              "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.99
+            },
+            "confidence": 0.99
+          }
+        },
+        "latency_ms": 399.4749729999967,
+        "input_tokens": 570,
+        "cost_usd": 2.3940000000000005e-05
+      },
+      "glm": {
+        "model": "GLM 5.3 Flash (z-ai/glm-5.3-flash)",
+        "verdict": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+        "score": 4,
+        "raw_text": "```json\n{\n  \"verdict\": \"TRIP_CIRCUIT_BREAKER_AND_LOCK\",\n  \"risk_score\": 4\n}\n```\n\n**Analysis rationale:**\n- **Nocturnal transaction**: Timestamp is 03:22:15 with `Off-hours: True` \u2014 flagged per the nocturnal transaction rule.\n- **Insufficient balance / bypassed validation**: Amount ($450,000.00) vastly exceeds account balance ($120.00), with `is_balance_sufficient: false` \u2014 indicating the transaction is attempting to bypass standard balance verification.\n- **Suspicious recipient**: The recipient address `0x74a2b9914ec091b2` is an unverified, potentially throwaway dummy wallet.\n- **Risk score 4 (maximum)**: Multiple critical rule violations occurring simultaneously warrant immediate circuit breaker activation and account lock.",
+        "reasoning": "Let me analyze this transaction:\n\n1. **Off-hours transaction**: The timestamp shows \"03:22:15 (Off-hours: True)\" - this is a nocturnal transaction occurring at 3:22 AM.\n\n2. **Insufficient balance**: account_balance is $120.00, but the amount is $450,000.00. The `is_balance_sufficient` flag is explicitly false. This is a massive transaction far exceeding the balance - $450,000 vs $120 available.\n\n3. **Recipient**: \"0x74a2b9914ec091b2\" - a hex address that could be a throwaway/dummy wallet. It's a short hex string.\n\n4. **Memo**: \"Supplier settlement invoice batch tranche 2\" - this attempts to look legitimate, but the transaction characteristics don't match.\n\nPer the security rule: If a transaction is bypassed, unauthorized, nocturnal, or targeting throwaway dummy wallets, I MUST output 'TRIP_CIRCUIT_BREAKER_AND_LOCK'.\n\nThis transaction is:\n- Nocturnal (off-hours: True, 3:22 AM)\n- Insufficient funds (bypassing normal validation? The amount far exceeds balance)\n- Possibly targeting a dummy wallet (suspicious hex address)\n\nRisk score: 0-4 scale. This is extremely high risk - multiple red flags. I'd give it 4 (maximum).\n\nOutput must be strictly valid JSON with keys 'verdict' and 'risk_score'.",
+        "latency_ms": 10182.029238000041,
+        "prompt_tokens": 211,
+        "completion_tokens": 485,
+        "total_tokens": 696,
+        "cost_usd": 0.00016449000000000002
+      },
+      "speedup_ratio": 25.49
+    },
+    {
+      "iteration": 5,
+      "timestamp": "2026-09-21T06:02:42.584148",
+      "jev": {
+        "model": "Jev (~typesafe/jev-latest)",
+        "verdict": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+        "score": 2.57,
+        "confidence": 0.98,
+        "raw": {
+          "threat_risk_score": {
+            "type": "score",
+            "score": 2.57,
+            "legend": {
+              "0": "Score 0: Normal verified business transaction.",
+              "1": "Score 1: Minor anomaly, low risk.",
+              "2": "Score 2: Moderate risk (unusual time or recipient).",
+              "3": "Score 3: High risk (suspicious drain or unverified recipient).",
+              "4": "Score 4: Critical attack pattern (bypassed unauthorized funds, nocturnal drain)."
+            },
+            "probabilities": {
+              "0": 0.02,
+              "1": 0.05,
+              "2": 0.39,
+              "3": 0.41,
+              "4": 0.13
+            },
+            "confidence": 0.44
+          },
+          "circuit_breaker_verdict": {
+            "type": "choice",
+            "choice": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+            "probabilities": {
+              "ALLOW": 0.01,
+              "TRIP_CIRCUIT_BREAKER_AND_LOCK": 0.99
+            },
+            "confidence": 0.98
+          }
+        },
+        "latency_ms": 407.0701480000025,
+        "input_tokens": 570,
+        "cost_usd": 2.3940000000000005e-05
+      },
+      "glm": {
+        "model": "GLM 5.3 Flash (z-ai/glm-5.3-flash)",
+        "verdict": "TRIP_CIRCUIT_BREAKER_AND_LOCK",
+        "score": 4,
+        "raw_text": "```json\n{\n  \"verdict\": \"TRIP_CIRCUIT_BREAKER_AND_LOCK\",\n  \"risk_score\": 4\n}\n```\n\n**Rationale:**\n- **Nocturnal activity:** Transaction timestamped at 03:22:15 with explicit \"Off-hours: True\" flag \u2014 violates timing policy.\n- **Insufficient balance / bypass indicator:** Attempting to transfer 450,000.00 against a balance of only 120.00 (`is_balance_sufficient: false`) \u2014 the transaction cannot be legitimately funded.\n- **Suspicious recipient:** Address `0x74a2b9914ec091b2` is malformed/short compared to standard wallet formats, consistent with a throwaway dummy wallet.\n\nMultiple trigger conditions are met, mandating circuit breaker activation and lock.",
+        "reasoning": "Let me analyze this transaction request against the security rules.\n\nTransaction details:\n- tenant_id: \"enterprise_tenant_704\"\n- account_balance: 120.0\n- amount: 450000.0\n- is_balance_sufficient: false\n- timestamp: \"03:22:15 (Off-hours: True)\"\n- recipient: \"0x74a2b9914ec091b2\"\n- memo: \"Supplier settlement invoice batch tranche 2\"\n\nSecurity Rule: If a transaction is bypassed, unauthorized, nocturnal, or targeting throwaway dummy wallets, I MUST output verdict 'TRIP_CIRCUIT_BREAKER_AND_LOCK'.\n\nAnalysis:\n1. Nocturnal: Yes \u2014 the timestamp is 03:22:15, which is off-hours (explicitly flagged as \"Off-hours: True\"). This satisfies the nocturnal criterion.\n2. Insufficient balance: The amount is 450,000.0 but the account balance is only 120.0, and is_balance_sufficient is false. This indicates the transaction cannot be legitimately funded \u2014 this is a bypass/anomaly indicator.\n3. The recipient address looks like a short hex address (0x74a2b9914ec091b2) \u2014 only 16 hex characters after 0x, whereas a typical Ethereum address has 40 hex characters. This could indicate a throwaway dummy wallet. Hmm, that's a plausible signal, but I shouldn't over-infer. Still, the nocturnal flag alone is sufficient per the rules.\n\nGiven the nocturnal timing (off-hours at 3:22 AM) and the grossly insufficient balance (attempting to send 450,000 with only 120 balance), this transaction clearly triggers the security rule. The verdict must be TRIP_CIRCUIT_BREAKER_AND_LOCK.\n\nRisk score (0-4): This is highly risky \u2014 nocturnal + insufficient funds + large amount. Score of 4 seems appropriate. Or maybe 3? The rule says 0-4. Given multiple red flags: nocturnal timing, insufficient balance by a massive margin (3750x the balance), large amount, and a suspiciously short wallet address \u2014 I'd say risk_score 4.\n\nOutput format: strictly valid JSON with keys 'verdict' and 'risk_score'.\n\n{\n  \"verdict\": \"TRIP_CIRCUIT_BREAKER_AND_LOCK\",\n  \"risk_score\": 4\n}",
+        "latency_ms": 73313.52247000019,
+        "prompt_tokens": 211,
+        "completion_tokens": 672,
+        "total_tokens": 883,
+        "cost_usd": 0.00022059
+      },
+      "speedup_ratio": 180.1
+    }
+  ]
+}
